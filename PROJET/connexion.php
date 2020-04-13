@@ -33,6 +33,8 @@ if ($db_found)
     else {
         session_start();
         $_SESSION['login'] = $login;
+        $_SESSION['staut'] = "membre";
+        header('location: index.php');
         echo 'Vous êtes bien identifié.';
     }
 }

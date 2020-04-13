@@ -46,7 +46,12 @@ if ($erreur == "") {
     if (!$result){
         die("impossible d ajouter cet enregistrement");
     }
-    echo "Votre compte a bien été créer !";
+    session_start();
+        $_SESSION['login'] = $login;
+        $_SESSION['staut'] = "membre";
+    echo '<div style="text-align: center";><h1>Votre compte a bien été créer !</h1></div> <br> <div style="text-align: center";><a href="index.php">Retour à lacceuil</a>';
+    
+    
 }
     else {
     echo "Erreur : $erreur";
