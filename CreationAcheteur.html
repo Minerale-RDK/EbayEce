@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Connexion</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="CreationAcheteur.css" />
+</head>
+
+<body>
+    <div class="col-9" id="Cadre1"> 
+        <div calss="col-7" id="Cadre2"> 
+            <br>
+            <h4><br>Bienvenue sur la page de création de compte<br><h4>
+                <br>
+                <div class="row">
+                <form action="CreationAcheteur.php" method="post" class="col-md4 ml-auto mr-auto">  
+                <input type="text" style="margin-top: 30px; ;" name="Prénom"id="Prénom" placeholder="Prénom">
+                <input type="text" style="margin-top: 30px;" name="Nom" id="Nom" placeholder="Nom"><br>
+                <input type="text" style="margin-top: 30px;" name="Identifiant" id="Identifiant" placeholder="Identifiant">
+                <input style="margin-top: 30px;" type="text" name="email" id="email" placeholder="Adresse email"><br>
+                <input style="margin-top: 30px;" type="password" name="pwd" id="pwd" placeholder="Mot de passe">
+                <input style="margin-top: 30px;" type="password" name="pwd2" id="pwd2" placeholder="Confirmer mot de passe"><br><br>
+                <div>
+                    <input type="checkbox" id="CGV" name="CGV" value="CGV">
+                    <label for="CGV" style="font-size: small;">Acceptez vous les <a href="CGV.htlm">Conditions Générales de Vente </a></label>
+                </div> <br>
+                <input type="submit" id="bttncreation" value="Créer le compte"; />
+                
+
+                </form>
+                </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
