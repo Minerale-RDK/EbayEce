@@ -10,6 +10,16 @@ $db_found = mysqli_select_db($db_handle, $database);
 
 if ($db_found)
 {
+    if ($login == "") { 
+        echo "Identifiant est vide. <br>";
+        include('login.html');
+        exit; }
+
+    if ($pass == "") {
+        echo"Mot de passe est vide. <br>";
+        include('login.html');
+        exit; }
+
     $sql = "SELECT pwd FROM acheteurs WHERE login='".$login."'";
     $req = mysqli_query($db_handle, $sql);
 

@@ -1,0 +1,31 @@
+#Cadre1
+{
+    width: 1000px;
+    height: 800px;
+    padding: 2%;
+    position: relative;
+    top: 20%;
+    margin-bottom: 20%;
+    left: 17%;
+    border : 8px groove teal;
+}
+
+#Cadre2
+{
+    width: 100%;
+    height: 100%;
+    border : 8px solid purple;
+    text-align: center;
+
+}
+#bttnconnex
+{
+    display: block;
+    margin: auto;
+}
+#table1
+{   
+    display: block;
+    margin: auto;
+
+}
