@@ -7,19 +7,22 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head> 
 <body>
     <nav class="navbar navbar-expand-md">
-        <a class="navbar-brand" href="#">Vendre</a>
+        <a class="navbar-brand" href="#">Vendre&ensp;<i class="fa fa-money" aria-hidden="true"></i></a>
         <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="main-navigation">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#">Votre Compte</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">
+                    Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
                 <li class="nav-item"><a class="nav-link">|</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Panier</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">
+                    Panier&ensp; <i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
                 <li class="nav-item"><a class="nav-link">|</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Admin</a></li>
             </ul> 
@@ -28,16 +31,32 @@
     <div>
         <a href="index.html"><img src="images/ebay-logo.png" class="logo-accueil"></a>
     </div>
-    <nav class="navbar navbar-expand-md">
-        <div class ="navbar-second" id="second-navigation">
+    <nav class="navbar navbar-expand-md navbar-light">
+        <div class="navbar-second">
             <hr>
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-categories" href="#">Accueil</a></li>
-                <li class="nav-item"><a class="nav-categories" href="#">Catégories</a></li>
-                <li class="nav-item"><a class="nav-categories" href="#">Achat</a></li>
-                <li class="nav-item"><a class="nav-categories" href="#">Dernières Ventes</a></li>  
-            </ul> 
-            <hr> <br><br>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Accueil&ensp;<i class="fa fa-home" aria-hidden="true"></i><span class="sr-only">Accueil</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Catégories
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">Ferraille ou Trésor</a>
+                <a class="dropdown-item" href="#">Bon pour le Musée</a>
+                <a class="dropdown-item" href="#">Accessoire VIP&ensp;<i class="fa fa-star" aria-hidden="true"></i></a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Autres Catégories</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Achat&ensp;<i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Les Meilleures Ventes&ensp;<i class="fa fa-heart" aria-hidden="true"></i></a>
+            </li>
+        </ul><hr>
         </div>
     </nav>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -82,14 +101,6 @@
                         number
                     </p> 
                 </div>
-                <div id="content">
-                    <div id="info">
-                        
-                        <a href="tel:4422702001">telephone : 0389384 </a><!--  ouvre un lien qui envoie vers une appli qui appelle le num  -->
-                        <br>
-                        <a href="mailto:solene.fontant@gmail.com?Subject=Webcontact">solene.jhsdjdhs@gmail.com</a>
-            
-                    </div>
             </div>
         <div class="footer-copyright text-center">&copy; 2020 Copyright | Droit d'auteur: Paul SENARD | Victor QUIDET | Solène HACOUN</div> 
         </div>
