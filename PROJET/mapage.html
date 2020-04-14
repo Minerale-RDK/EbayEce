@@ -14,5 +14,52 @@
  <?php 
  include ("menu.php");
  ?>
+
+ <h1>Ajouter un objet à vendre</h1>
+ 
+<form action="ajoutItem.php" method="POST" enctype="multipart/form-data">
+    <input type="text" style="margin-top: 30px;" name="Nom" id="Nom" placeholder="Nom"><br>
+
+    <input type="text" style="margin-top: 30px; height: 150px; width: 300px;" name="Description" id="Description" placeholder="Description"><br>
+    <br>
+
+    <label for="categorie">Séléctionner une catégorie</label>
+    <select name="categorie" id="categorie">
+        <option value="FoT">Ferraille ou Trésor</option>
+        <option value="BpM">Bon pour le musée</option>
+        <option value="vip">Accessoire VIP</option>
+    </select><br><br>
+    
+
+    <input type="checkbox" name="enchere" id="enchere" value="enchere">
+    <label for="enchere" style="font-size: small;">Enchères</label>
+
+    <input type="checkbox" name="achatim" id="achatim" value="achatim">
+    <label for="achatim" style="font-size: small;">Achat immédiat</label>
+
+    <input type="checkbox" name="meilleurof" id="meilleurof" value="meilleurof">
+    <label for="meilleurof" style="font-size: small;">Meilleure offre</label><br>
+
+    <input type="hidden" style="margin-top: 30px; ;" name="MAX_FILE_SIZE" value="100000">
+    Photo 1 : <input type="file" style="margin-top: 30px; ;" name="photo1"><br>
+
+    <input type="hidden" style="margin-top: 30px; ;" name="MAX_FILE_SIZE" value="100000">
+    Photo 2 : <input type="file" style="margin-top: 30px; ;" name="photo2"><br>
+
+    <input type="hidden" style="margin-top: 30px; ;" name="MAX_FILE_SIZE" value="100000">
+    Photo 3 : <input type="file" style="margin-top: 30px; ;" name="photo3"><br>
+
+    <input type="hidden" style="margin-top: 30px; ;" name="MAX_FILE_SIZE" value="2000000">
+    Vidéo (max 2mo) : <input type="file" style="margin-top: 30px; ;" name="video"><br>
+    
+    <input type="number" style="margin-top: 30px;" name="prix" id="prix" placeholder="Prix">
+    <label for="prix">€</label><br>
+
+    <input type="submit" id="bttnvalider" value="Mettre en vente">
+
+
+</form>
+
+
  </body>
  </html>

@@ -21,8 +21,10 @@ if ($db_found)
         exit; }
 
     $sql = "SELECT pwd FROM acheteurs WHERE login='".$login."'";
+    $chercheID = "SELECT ID FROM acheteurs WHERE login ='".$login."'";
+    $req2 = mysqli_query($db_handle, $chercheID);
     $req = mysqli_query($db_handle, $sql);
-
+    $id = mysqli_fetch_assoc($req2);
     $data = mysqli_fetch_assoc($req);
 
     if($data['pwd'] != $pass) {
@@ -33,6 +35,7 @@ if ($db_found)
     else {
         session_start();
         $statut = "membre";
+        $_SESSION['id'] = $id['ID'];
         $_SESSION['login'] = $login;
         $_SESSION['statut'] = $statut;
         header('location: index.php');

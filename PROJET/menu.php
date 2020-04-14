@@ -1,3 +1,7 @@
+<?php
+session_start();
+echo $_SESSION['id'];
+?>
 <nav class="navbar navbar-expand-md">
         <a class="navbar-brand" href="#">Vendre&ensp;<i class="fa fa-money" aria-hidden="true"></i></a>
         <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
@@ -19,7 +23,7 @@
                    <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
                </ul>';
                 }
-                elseif($_SESSION['statut'] == "administrateur"{
+                elseif($_SESSION['statut'] == "administrateur"){
                     echo '<ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="login.html">
                         Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
