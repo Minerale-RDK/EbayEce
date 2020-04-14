@@ -1,0 +1,113 @@
+body {
+    padding: 0px; 
+    margin: 0px; 
+    background: whitesmoke;
+}
+hr{
+    margin: 10px auto;
+    width: 100%;
+    height: 1px;
+    background-color: grey;
+    border: none; /*on supprime le style par défaut*/
+}
+.nav-link, .navbar-brand {
+    color: #000;
+    cursor: pointer; 
+}
+.nav-link {
+    margin-right: 1em !important;
+}
+.nav-categories {
+    font-size: 80%;
+    color: grey;
+    cursor: pointer;
+    margin-left: 5em !important;
+    margin-right: 5em !important;
+}
+.nav-link:hover {
+    color: rgb(255, 255, 255); 
+}
+.navbar-collapse { 
+    justify-content: flex-end;
+}
+.navbar-second { 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.logo-accueil{
+    width: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.item {
+    margin: 40px 10px;
+    box-shadow: 0 15px 35px #3232321a, 0 5px 15px #0000001a;
+    transition: transform 0.3s;
+    transform:  translate3d(0, -1px,0);
+}
+.item:hover{
+    transform: translate3d(0, -10px,0);
+}
+.item img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.overlay {
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    left: 0px;
+    top: 0px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.page-footer { 
+    background-color: black; 
+    color: #ccc;
+    padding: 60px 0 30px;
+}
+.footer-copyright { 
+    color: #666; 
+    padding: 40px 0;
+}
+@media (max-width: 575.98px) {
+    .description {
+        left: 0;
+        padding: 0 15px; 
+        position: absolute; 
+        top: 10%; 
+        transform: none; 
+        text-align: center;
+    }
+    .description h1 {
+        font-size: 2em; 
+    }
+    .description p { 
+        font-size: 
+        1.2rem;
+    }
+    .features { 
+        margin: 0;
+    } 
+}
+
+/**
+CAROUSEL
+*/
+ .carousel {
+    position: relative;
+    overflow : hidden;
+ }
+
+ .carousel__container::after {
+    content: '';
+    clear: both;
+    display: table;
+ }
+
+ .carousel__item {
+    float: left;
+ }
