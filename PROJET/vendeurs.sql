@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 14, 2020 at 08:32 AM
+-- Generation Time: Apr 14, 2020 at 06:09 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
@@ -28,15 +28,17 @@ CREATE TABLE `vendeurs` (
   `Prenom` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `file_url` varchar(255) NOT NULL
+  `file_url` varchar(255) NOT NULL,
+  `cover_url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `vendeurs`
 --
 
-INSERT INTO `vendeurs` (`ID`, `login`, `pwd`, `Nom`, `Prenom`, `email`, `name`, `file_url`) VALUES
-(1, 'paulo92', 'polo', 'Senard', 'Paul', 'paulsenard@free.fr', 'avatar.jpg', 'files/paulo92/avatar.jpg');
+INSERT INTO `vendeurs` (`ID`, `login`, `pwd`, `Nom`, `Prenom`, `email`, `name`, `file_url`, `cover_url`) VALUES
+(1, 'paulo92', 'polo', 'Senard', 'Paul', 'paulsenard@free.fr', 'avatar.jpg', 'files/paulo92/avatar.jpg', ''),
+(9, 'paulo11', 'aa', 'martin', 'Clément', 'paulsenard@free.fr', 'avatar.jpg', 'files/paulo11/avatar.jpg', 'images/fonddecouv/5.jpg');
 
 --
 -- Indexes for dumped tables
@@ -56,4 +58,4 @@ ALTER TABLE `vendeurs`
 -- AUTO_INCREMENT for table `vendeurs`
 --
 ALTER TABLE `vendeurs`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;

@@ -1,0 +1,29 @@
+.contenu
+{
+    width: 50%;
+    height: 500px;
+    margin: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+ 
+#entiere
+{
+    float: left;
+    width: 100%;
+    height: 350px;
+    margin: 0;
+    padding: 0;
+}
+
+#img1{
+
+    width: 200px;
+    height: auto;
+    position:absolute;
+    left:55%;
+    top: 41%;
+    margin-left:-25%; /* admettant que la taille de ton image fasse 40px */
+
+ }

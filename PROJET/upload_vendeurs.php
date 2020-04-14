@@ -7,10 +7,8 @@ $email = isset($_POST["email"])? $_POST["email"] : "";
 $pwd = isset($_POST["pwd"])? $_POST["pwd"] : "";
 $pwd2 = isset($_POST["pwd2"])? $_POST["pwd2"] : "";
 $cgv = isset($_POST["CGV"])? $_POST["CGV"] :"";
-$ban1 = isset($_POST["couv1"])? $_POST["couv1"] :"";
-$ban2 = isset($_POST["couv2"])? $_POST["couv2"] :"";
-$ban3 = isset($_POST["couv3"])? $_POST["couv3"] :"";
-$ban4 = isset($_POST["couv4"])? $_POST["couv4"] :"";
+$ban = isset($_POST["cover"])? $_POST["cover"] :"";
+
 $erreur = "";
 
 $database = "ebayece";
@@ -44,21 +42,16 @@ if ($pwd != $pwd2) {
     $erreur .= "Les mots de passes sont différents. <br>";
 }
 
-echo"yo";
-echo $_GET['#list-home'];
-echo $_POST['#list-home'];
-  if (isset($_GET['shift'])) {
-    echo"yo";
-  }
-
 if(!empty($_FILES)){
     $file_name = $_FILES['fichier']['name'];
     $file_extension = strrchr($file_name,".");
 
     $file_tmp_name = $_FILES['fichier']['tmp_name'];
     $file_dest = 'files/'.$login;
-    mkdir($file_dest, 0700);
-    $file_dest = $file_dest.'/'.$file_name;
+    if ($login != ""){
+        mkdir($file_dest, 0700);
+        $file_dest = $file_dest.'/'.$file_name;
+    }
 
     $extensions_autorisees = array('.jpg', '.jpeg', '.png');
 
@@ -75,10 +68,15 @@ if(!empty($_FILES)){
         exit;
     }
     
+} else {
+    echo "Erreur : Vous devez mettre une photo pour votre avatar";
+    include('CreationVendeur.php');
+    exit; 
 }
 
 if ($erreur == "") {
-    $sqlInsert = "INSERT INTO vendeurs(login, pwd, Nom, Prenom, email, name, file_url) VALUES ('$login', '$pwd', '$nom', '$prenom', '$email', '$file_name','$new_file_dest')";
+    $sqlInsert = "INSERT INTO vendeurs(login, pwd, Nom, Prenom, email, name, file_url, cover_url) 
+    VALUES ('$login', '$pwd', '$nom', '$prenom', '$email', '$file_name','$new_file_dest','$ban')";
     $result = mysqli_query($db_handle, $sqlInsert);
     if (!$result){
         die("impossible d ajouter cet enregistrement");
