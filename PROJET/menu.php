@@ -7,7 +7,7 @@
 
             
                 <?php 
-                if (isset($_SESSION['login']))
+                if ($_SESSION['statut'] == "membre")
                 {
                    echo'<ul class="navbar-nav">
                    <li class="nav-item"><a class="nav-link" href="mapage.html">
@@ -19,6 +19,17 @@
                    <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
                </ul>';
                 }
+                elseif($_SESSION['statut'] == "administrateur"{
+                    echo '<ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="login.html">
+                        Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
+                    <li class="nav-item"><a class="nav-link">|</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">
+                        Panier&ensp; <i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
+                    <li class="nav-item"><a class="nav-link">|</a></li>
+                    <li class="nav-item"><a class="nav-link" href="adminPage.php">Admin</a></li>
+                </ul> ';
+                }
                 else{
                     echo '<ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="login.html">
@@ -29,6 +40,7 @@
                     <li class="nav-item"><a class="nav-link">|</a></li>
                     <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
                 </ul> ';
+
                 }
                 ?>
                  </div>
