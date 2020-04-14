@@ -16,7 +16,7 @@
                    <li class="nav-item"><a class="nav-link" href="#">
                        Panier&ensp; <i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
                    <li class="nav-item"><a class="nav-link">|</a></li>
-                   <li class="nav-item"><a class="nav-link" href="#">Admin</a></li>
+                   <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
                </ul>';
                 }
                 else{
@@ -27,7 +27,7 @@
                     <li class="nav-item"><a class="nav-link" href="#">
                         Panier&ensp; <i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
                     <li class="nav-item"><a class="nav-link">|</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Admin</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
                 </ul> ';
                 }
                 ?>
