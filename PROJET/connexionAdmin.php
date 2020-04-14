@@ -12,39 +12,35 @@ if ($db_found)
 {
     if ($login == "") { 
         echo "Identifiant est vide. <br>";
-        include('login.html');
+        include('admin.php');
         exit; }
 
     if ($pass == "") {
         echo"Mot de passe est vide. <br>";
-        include('login.html');
+        include('admin.php');
         exit; }
 
-    $sql = "SELECT pwd FROM acheteurs WHERE login='".$login."'";
-    $chercheID = "SELECT ID FROM acheteurs WHERE login ='".$login."'";
-    $req2 = mysqli_query($db_handle, $chercheID);
+    $sql = "SELECT pwd FROM administrateurs WHERE login='".$login."'";
     $req = mysqli_query($db_handle, $sql);
-    $id = mysqli_fetch_assoc($req2);
+
     $data = mysqli_fetch_assoc($req);
 
     if($data['pwd'] != $pass) {
         echo '<p>Mauvais identifiant ou mot de passe.</p>';
-        include('Login.html');
+        include('admin.php');
         exit;
     }
     else {
         session_start();
-        $statut = "membre";
-        $_SESSION['id'] = $id['ID'];
         $_SESSION['login'] = $login;
-        $_SESSION['statut'] = $statut;
-        header('location: index.php');
+        $_SESSION['statut'] = "administrateur";
+        header('location: adminPage.php');
         echo 'Vous êtes bien identifié.';
     }
 }
 else {
     echo '<p> Vous avez oublié un champ.</p>';
-    include('login.html');
+    include('admin.php');
     exit;
 }
 
