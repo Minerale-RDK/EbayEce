@@ -26,6 +26,77 @@ session_start();
             <img src="files/'.$_SESSION['login'].'/avatar.jpg" id="img1" class="img-thumbnail" alt="avatar.jpg">';
         ?>
     </div>
+    <div class="objets">
+        <h1>   Mes objets en vente</h1><br>
+        <div class="card-deck">
+            <div class="card" style="max-width: 33%;">
+                <div class="card-img-top">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="images/1.jpg" alt="First slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="images/2.jpg" alt="Second slide">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+                <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+            <div class="card" style="max-width: 33%;">
+                <div class="card-img-top">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="images/1.jpg" alt="First slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="images/2.jpg" alt="Second slide">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+                <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer class="page-footer"> 
         <div class="container">
             <div class="row">
