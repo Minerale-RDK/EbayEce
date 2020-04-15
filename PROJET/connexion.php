@@ -1,11 +1,11 @@
 <?php
 
 $login = isset($_POST["identifiant"]) ? $_POST["identifiant"] : "";
-$pass = isset($_POST["passw"]) ? $_POST["passw"] : "";
+$pass = isset($_POST["mdp"]) ? $_POST["mdp"] : "";
 
 $database = "ebayece";
 
-$db_handle = mysqli_connect('127.0.0.1', 'root', 'root');
+$db_handle = mysqli_connect('localhost:3308', 'root', '');
 $db_found = mysqli_select_db($db_handle, $database);
 
 if ($db_found)

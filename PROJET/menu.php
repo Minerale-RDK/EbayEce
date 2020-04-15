@@ -10,20 +10,55 @@
 
 <nav class="navbar navbar-expand-md">
         <?php
+        if (isset($_SESSION['login']))
+        {
             echo '<a class="navbar-brand" href="#">Bonjour  '.$_SESSION['login'].'</a>';
+        }
+        else{
+            echo '<a class="navbar-brand" href="#">Bonjour.</a>';
+        }           
         ?>
-        <a class="navbar-brand" href="#">Vendre&ensp;<i class="fa fa-money" aria-hidden="true"></i></a>
-        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="main-navigation">
+        <?php
+        if (isset($_SESSION['statut']) && $_SESSION['statut'] == "acheteur")
+        {
+            echo '<a class="navbar-brand" href="login.php">Vendre&ensp;<i class="fa fa-money" aria-hidden="true"></i></a>
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="main-navigation">';
+        }
+        elseif(isset($_SESSION['statut']) && $_SESSION['statut'] == "administrateur")
+        {
+            echo '<a class="navbar-brand" href="login.php">Vendre&ensp;<i class="fa fa-money" aria-hidden="true"></i></a>
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="main-navigation">';
+        }
+        elseif (isset($_SESSION['statut']) && $_SESSION['statut'] == "vendeur")
+        {
+            echo '<a class="navbar-brand" href="nouvelitem.php">Vendre&ensp;<i class="fa fa-money" aria-hidden="true"></i></a>
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="main-navigation">';
+        }
+        else{
+            echo '<a class="navbar-brand" href="login.php">Vendre&ensp;<i class="fa fa-money" aria-hidden="true"></i></a>
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="main-navigation">';
+        }
+        ?>
+
 
             
                 <?php 
-                if (isset($_SESSION['statut']) && $_SESSION['statut'] == "membre")
+                if (isset($_SESSION['statut']) && $_SESSION['statut'] == "acheteur")
                 {
                    echo'<ul class="navbar-nav">
-                   <li class="nav-item"><a class="nav-link" href="nouvelitem.php">
+                   <li class="nav-item"><a class="nav-link" href="#">
                        Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
                    <li class="nav-item"><a class="nav-link">|</a></li>
                    <li class="nav-item"><a class="nav-link" href="#">
@@ -34,21 +69,27 @@
                 }
                 elseif(isset($_SESSION['statut']) && $_SESSION['statut'] == "administrateur"){
                     echo '<ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="login.html">
+                    <li class="nav-item"><a class="nav-link" href="adminPage.php">
                         Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
-                    <li class="nav-item"><a class="nav-link">|</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">
-                        Panier&ensp; <i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
                     <li class="nav-item"><a class="nav-link">|</a></li>
                     <li class="nav-item"><a class="nav-link" href="adminPage.php">Admin</a></li>
                 </ul> ';
                 }
+                elseif (isset($_SESSION['statut']) && $_SESSION['statut'] == "vendeur")
+                {
+                   echo'<ul class="navbar-nav">
+                   <li class="nav-item"><a class="nav-link" href="moncompte.php">
+                       Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
+                   <li class="nav-item"><a class="nav-link">|</a></li>
+                   <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
+               </ul>';
+                }
                 else{
                     echo '<ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="login.html">
+                    <li class="nav-item"><a class="nav-link" href="login.php">
                         Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
                     <li class="nav-item"><a class="nav-link">|</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">
+                    <li class="nav-item"><a class="nav-link" href="login.php">
                         Panier&ensp; <i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
                     <li class="nav-item"><a class="nav-link">|</a></li>
                     <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
