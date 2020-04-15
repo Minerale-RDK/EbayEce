@@ -1,7 +1,8 @@
 body {
     padding: 0px; 
     margin: 0px; 
-    background: rgb(245, 245, 245);
+/*    background: white;*/
+    background: whitesmoke;
 }
 hr{
     margin: 10px auto;
@@ -10,11 +11,9 @@ hr{
     background-color: rgb(126, 25, 25);
     border: none; /*on supprime le style par défaut*/
 }
-
-.nav-link, .navbar-brand{
-    color: black;
+.nav-link, .navbar-brand {
+    color: #000;
     cursor: pointer; 
-    background-color: whitesmoke;
 }
 .nav-link {
     margin-right: 1em !important;
@@ -43,11 +42,6 @@ hr{
     margin-left: auto;
     margin-right: auto;
 }
-.btn {
-    background-color: whitesmoke;
-    border-color: whitesmoke;
-    margin-bottom: 15px;
-}
 .item {
     margin: 40px 10px;
     box-shadow: 0 15px 35px #3232321a, 0 5px 15px #0000001a;
@@ -62,6 +56,24 @@ hr{
     width: 100%;
     height: auto;
 }
+
+.col-container {
+    display: table; /* Make the container element behave like a table */
+  /*  display: flex;*/
+    width: 100%; /* Set full-width to expand the whole page */
+   
+}
+
+.col {
+/*    background-color: aqua;*/
+    display: table-cell; /* Make elements inside the container behave like table cells */
+}
+
+ /* .col {
+  flex: 1;
+  padding: 10px;
+}*/
+
 .overlay {
     position: absolute;
     min-height: 100%;
@@ -73,8 +85,12 @@ hr{
 
 .page-footer { 
     background-color: black; 
+
+  left: 0;
+  bottom: 0;
+  width: 100%;
     color: #ccc;
-    padding: 60px 0 30px;
+    padding: 0px 0 0px;
 }
 .footer-copyright { 
     color: #666; 
@@ -101,3 +117,20 @@ hr{
     } 
 }
 
+/**
+CAROUSEL
+*/
+ .carousel {
+    position: relative;
+    overflow : hidden;
+ }
+
+ .carousel__container::after {
+    content: '';
+    clear: both;
+    display: table;
+ }
+
+ .carousel__item {
+    float: left;
+ }
