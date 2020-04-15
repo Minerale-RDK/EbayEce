@@ -1,7 +1,15 @@
 <?php
-session_start();
-echo $_SESSION['id'];
+
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+    
+} 
+
 ?>
+
+
+   <link rel="stylesheet" type="text/css" href="css/styles.css"> 
 <nav class="navbar navbar-expand-md">
         <a class="navbar-brand" href="#">Vendre&ensp;<i class="fa fa-money" aria-hidden="true"></i></a>
         <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
@@ -11,10 +19,10 @@ echo $_SESSION['id'];
 
             
                 <?php 
-                if ($_SESSION['statut'] == "membre")
+                if (isset($_SESSION['statut']) && $_SESSION['statut'] == "membre")
                 {
                    echo'<ul class="navbar-nav">
-                   <li class="nav-item"><a class="nav-link" href="mapage.html">
+                   <li class="nav-item"><a class="nav-link" href="nouvelitem.php">
                        Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
                    <li class="nav-item"><a class="nav-link">|</a></li>
                    <li class="nav-item"><a class="nav-link" href="#">
@@ -23,7 +31,7 @@ echo $_SESSION['id'];
                    <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
                </ul>';
                 }
-                elseif($_SESSION['statut'] == "administrateur"){
+                elseif(isset($_SESSION['statut']) && $_SESSION['statut'] == "administrateur"){
                     echo '<ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="login.html">
                         Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
