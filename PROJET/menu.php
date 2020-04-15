@@ -1,3 +1,11 @@
+<?php
+        if(!isset($_SESSION)) 
+        { 
+            session_start(); 
+
+        }
+?>
+
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 
 <nav class="navbar navbar-expand-md">
