@@ -1,7 +1,7 @@
 <?php
 
 $login = isset($_POST["identifiant"]) ? $_POST["identifiant"] : "";
-$pass = isset($_POST["passw"]) ? $_POST["passw"] : "";
+$pass = isset($_POST["mdp"]) ? $_POST["mdp"] : "";
 
 $database = "ebayece";
 
@@ -12,39 +12,57 @@ if ($db_found)
 {
     if ($login == "") { 
         echo "Identifiant est vide. <br>";
-        include('login.html');
+        include('login.php');
         exit; }
 
     if ($pass == "") {
         echo"Mot de passe est vide. <br>";
-        include('login.html');
+        include('login.php');
         exit; }
 
-    $sql = "SELECT pwd FROM acheteurs WHERE login='".$login."'";
-    $chercheID = "SELECT IDAcheteur FROM acheteurs WHERE login ='".$login."'";
-    $req2 = mysqli_query($db_handle, $chercheID);
+    
+    $sql = "SELECT pwd FROM vendeurs WHERE login='".$login."'";
     $req = mysqli_query($db_handle, $sql);
-    $id = mysqli_fetch_assoc($req2);
     $data = mysqli_fetch_assoc($req);
 
     if($data['pwd'] != $pass) {
-        echo '<p>Mauvais identifiant ou mot de passe.</p>';
-        include('Login.html');
-        exit;
+        $sql = "SELECT pwd FROM acheteurs WHERE login='".$login."'";
+        $req = mysqli_query($db_handle, $sql);
+        $data = mysqli_fetch_assoc($req);
+        if($data['pwd'] != $pass) {
+            echo '<p>Mauvais identifiant ou mot de passe.</p>';
+            include('login.php');
+            exit;
+        }
+        else {
+            $statut = "acheteur";
+            $_SESSION['login'] = $login;
+            $_SESSION['statut'] = $statut;
+            $sql = "SELECT * FROM acheteurs WHERE login='".$login."'";
+            $req = mysqli_query($db_handle, $sql);
+            $data = mysqli_fetch_assoc($req);
+            $_SESSION['id'] = $data['IDAcheteur'];
+            //header('location: moncompte.php');
+            echo 'Vous êtes bien identifié.';
+        }
     }
     else {
         session_start();
-        $statut = "membre";
-        $_SESSION['id'] = $id['IDAcheteur'];
+        $statut = "vendeur";
         $_SESSION['login'] = $login;
         $_SESSION['statut'] = $statut;
-        header('location: index.php');
+        $sql = "SELECT * FROM vendeurs WHERE login='".$login."'";
+        $req = mysqli_query($db_handle, $sql);
+        $data = mysqli_fetch_assoc($req);
+        $_SESSION['fond'] = $data['cover_url'];
+        $_SESSION['id'] = $data['IDVendeur'];
+        header('location: moncompte.php');
         echo 'Vous êtes bien identifié.';
     }
 }
 else {
     echo '<p> Vous avez oublié un champ.</p>';
-    include('login.html');
+    include('login.php');
     exit;
 }
 

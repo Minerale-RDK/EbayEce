@@ -1,107 +1,158 @@
-<?php
+<!DOCTYPE HTML>
+<html>
+<html>
+<head>
+<title>Connexion Vendeur</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/CreationVendeur.css" />
+</head>
+    
+    
+    <body>
+    <?php 
+            include ("menu.php");
+      ?>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-9 mx-auto" >
+          
+        <div class="card card-signin flex-row my-5" >
+          
+          <div class="card-body" >
+              
+            <h4 class="card-header text-center" >Bienvenue sur la page de création du compte vendeur</h4>
+              <br>
+              
+            <form class="col-md4 ml-auto mr-auto" action="upload_vendeurs.php" method="post" enctype="multipart/form-data" >
+                
+              <div class="form-label-group">
+                 <label for="Prénom">Prénom</label>
+                <input type="text" class="form-control" name="Prénom" id="Prénom" aria-describedby="nameHelp" placeholder="Entrez votre prénom">
+                
+              </div>
 
-$prenom = isset($_POST["Prénom"])? $_POST["Prénom"] : ""; 
-$nom = isset($_POST["Nom"])? $_POST["Nom"] : "";
-$login = isset($_POST["Identifiant"])? $_POST["Identifiant"] : "";
-$email = isset($_POST["email"])? $_POST["email"] : "";
-$pwd = isset($_POST["pwd"])? $_POST["pwd"] : "";
-$pwd2 = isset($_POST["pwd2"])? $_POST["pwd2"] : "";
-$cgv = isset($_POST["CGV"])? $_POST["CGV"] :"";
-$erreur = "";
+              <div class="form-label-group">
+                <label for="Nom">Nom</label>
+                <input type="text" class="form-control" name="Nom" id="Nom" aria-describedby="nameHelp" placeholder="Entrez votre nom"><br>
+              </div>
+                
+                <div class="form-label-group">
+                <label for="Nom">Identifiant</label>
+                <input type="text" class="form-control" name="Identifiant" id="Identifiant" aria-describedby="identifiantHelp" placeholder="Entrez votre login"><br>
+              </div>
+                
+                <div class="form-label-group">
+                <label for="Nom">Email</label>
+                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Entrez votre adresse email"><br>
+              </div>
+                
+                <div class="form-label-group">
+                <label for="Nom">Mot de passe</label>
+                <input type="password" class="form-control" name="pwd" id="pwd" aria-describedby="pwdHelp" placeholder="Entrez votre mot de passe"><br>
+              </div>
+                
+                <div class="form-label-group">
+                <label for="Nom">Confirmation mot de passe</label>
+                <input type="password" class="form-control" name="pwd2" id="pwd2" aria-describedby="pwd2Help" placeholder="Veuillez confimer votre mot de passe"><br>
+              </div>
+              
+              <hr class="my-4">
+            
+                <label ><dt>Importez votre photo de profil :</dt></label><br>
+                <input type="hidden" style="margin-top: 30px; ;" name="MAX_FILE_SIZE" value="100000">
+                Avatar : <input size="100" type="file" style="margin-top: 30px;" name="fichier" value=""><br>
+                <br><br>
+                
+    <label ><dt>Choisissez votre fond préféré :</dt></label><br><br>            
+               
+<div class="row">
+    
 
-$database = "ebayece";
+                 
+     <div style="margin-left: 30px " class="col">
+                        
+           <div class="cover"><img src="images/fonddecouv/1.jpg" alt="automne"></div>
+                                
+          
+               <div class="form-check">
+                  <input class="form-check-input" type="radio" name="cover" id="cover" value="images/fonddecouv/1.jpg" checked>
+                     <label class="form-check-label" for="cover">  Couverture Automne</label>
+               </div>                           
 
-$db_handle = mysqli_connect('localhost:3308', 'root', '');
-$db_found = mysqli_select_db($db_handle, $database);
+      </div>          
+                    
+      <div style="margin-left: 30px " class="col">
+                        
+             <div class="cover"><img src="images/fonddecouv/5.jpg" alt="Wallpaper"></div>
+                 <div class="form-check">
+                     <input class="form-check-input" type="radio" name="cover" id="cover" value="images/fonddecouv/5.jpg" checked>
+                    <label class="form-check-label" for="cover"> Couverture Stylisée</label>
+                 </div>  
 
-$dossier = 'upload/';
-$fichier = basename($_FILES['avatar']['name']);
-$taille_maxi = 100000;
-$taille = filesize($_FILES['avatar']['tmp_name']);
-$extensions = array('.png', '.gif', '.jpg', '.jpeg');
-$extension = strrchr($_FILES['avatar']['name'], '.'); 
+      </div>     
+     
+      <div style="margin-left: 30px " class="col" >
 
-if($db_found){
+            <div class="cover"><img src="images/fonddecouv/3.jpg" alt="Flou"></div>
+                 <div class="form-check">
+                     <input class="form-check-input" type="radio" name="cover" id="cover" value="images/fonddecouv/3.jpg" checked>
+                                <label class="form-check-label" for="cover">
+                                    Couverture Gouttes
+                                </label>
+                </div>   
+                    
+       </div>
+
+                <div style=" margin-left:30px ; margin-right: 30px " class="col">
+                        
+                     <div class="cover"><img  src="images/fonddecouv/4.jpg" alt="Etoiles"></div>  
+                                <div class="form-check">
+                                <input class="form-check-input" type="radio" name="cover" id="cover" value="images/fonddecouv/4.jpg" checked>
+                                <label class="form-check-label" for="cover">
+                                    Couverture Etoiles
+                                </label>
+                                </div> 
+
+                </div>  
+                    
+                    
+</div>   
+                <br> <br> <br>
+                
+    
+   <div for="categorie" class="form-label-group">            
+                    
+
+               <div>
+                     <input type="checkbox" id="CGV" name="CGV" value="CGV">
+                     <label for="CGV" style="font-size: small;">Acceptez vous les <a href="CGV.htlm">Conditions Générales de Vente </a></label>
+               </div>
+
+                <input type="submit" id="bttncreation" value="Créez votre compte" class="btn btn-lg btn-primary btn-block " target="blank">
+          <br>
+                
+                </div>
+                
+            
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </body>
+
+    
+    
+
+</html>
 
 
- if ($prenom == "") { 
- $erreur .= "Prénom est vide. <br>";
- }
- if ($nom == "") {
- $erreur .= "Nom est vide. <br>"; 
-}
- if ($cgv =="") {
-     $erreur .= "Merci d'accepter les conditions générales de ventes. <br>";
- }
- if ($login == "") {
- $erreur .= "Identifiant est vide. <br>"; 
-}
- if ($email == "") {
- $erreur .= "E-mail est vide. <br>"; 
-}
- if ($pwd == "") {
-    $erreur .= "Mot de passe est vide. <br>"; 
-}
-}
-if ($pwd != $pwd2) {
-    $erreur .= "Les mots de passes sont différents. <br>";
-} 
 
-if ($erreur == "") {
-    $sqlInsert = "INSERT INTO acheteurs (login, pwd, Nom, Prenom, email) VALUES ('$login', '$pwd', '$nom', '$prenom', '$email')";
-    $result = mysqli_query($db_handle, $sqlInsert);
-    if (!$result){
-        die("impossible d ajouter cet enregistrement");
-    }
-    echo "Votre compte a bien été créer !";
-}
-    else {
-    echo "Erreur : $erreur";
-    include('CreationAcheteur.html');
-    exit; 
-    }
-
-if(isset($_FILES['avatar'])){ 
-    $dossier = 'upload/';
-    $fichier = basename($_FILES['avatar']['name']);
-    if(move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-    {
-        echo 'Upload effectué avec succès !';
-    }
-    else //Sinon (la fonction renvoie FALSE).
-    {
-        echo 'Echec de l\'upload !';
-    }
-}
-
-//Début des vérifications de sécurité...
-if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
-{
-     $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg, txt ou doc...';
-}
-if($taille>$taille_maxi)
-{
-     $erreur = 'Le fichier est trop gros...';
-}
-if(!isset($erreur)) //S'il n'y a pas d'erreur, on upload
-{
-     //On formate le nom du fichier ici...
-     $fichier = strtr($fichier, 
-          'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
-          'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
-     $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
-     if(move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-     {
-          echo 'Upload effectué avec succès !';
-     }
-     else //Sinon (la fonction renvoie FALSE).
-     {
-          echo 'Echec de l\'upload !';
-     }
-}
-else
-{
-     echo $erreur;
-}
-
-?>
