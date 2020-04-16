@@ -33,6 +33,7 @@ $achatim = isset($_POST["achatim"])? $_POST["achatim"] :"";
 $prix = isset($_POST["prix"])? $_POST["prix"] :"";
 $date1 = isset($_POST["date1"])? $_POST["date1"] :"";
 $erreur = "";
+$prix2 = isset($_POST["prix2"])? $_POST["prix2"] :"";
 
 $date2 = strtotime($date1);
 $date3 =time();
@@ -49,7 +50,7 @@ $db_found = mysqli_select_db($db_handle, $database);
 
 if($_FILES['photo']['name'][0] != "" || $_FILES['photo']['name'][1] != "" || $_FILES['photo']['name'][2] != "" || $_FILES['photo']['name'][3] != ""){
     
-    
+    $a =0;
     $timestamp = microtime();
     global $chemindossier;
     $chemindossier = 'files/imgitem/'.$timestamp;
@@ -68,20 +69,35 @@ if($_FILES['photo']['name'][0] != "" || $_FILES['photo']['name'][1] != "" || $_F
         $file_extension = strrchr($file_name,".");
         $file_dest = $file_dest.'/'.$file_name;
 
-        //echo $_FILES['photo']['name'][$i];
-        //echo $file_extension;
+
         if(in_array($file_extension, $extensions_autorisees))
         {
             if(move_uploaded_file($file_tmp_name, $file_dest))
             {
-                $file_name = 'photo'.$i.$file_extension;
-                $new_file_dest ='files/imgitem/'.$timestamp.'/'.$file_name;
-                rename($file_dest, $new_file_dest);
-                echo 'Fichier enregistré avec succès<br>';
+                
+                if($file_extension == ".jpg" || $file_extension == ".jpeg" || $file_extension == ".png" || $file_extension == ".JPG" || $file_extension == ".JPEG" || $file_extension == ".PNG"){
+                    
+                    $file_name = 'photo'.$a.$file_extension;
+                    $new_file_dest ='files/imgitem/'.$timestamp.'/'.$file_name;
+                    rename($file_dest, $new_file_dest);
+                    //echo $a;
+                    $a++;
+                    //echo 'Fichier enregistré avec succès<br>';
+                }
+                else{
+                     $file_name = 'video'.$i.$file_extension;
+                    $new_file_dest ='files/imgitem/'.$timestamp.'/'.$file_name;
+                    rename($file_dest, $new_file_dest);
+                   // echo 'Fichier enregistré avec succès<br>';
+                    
+                }
             }
             else 
             {
-                echo "il y a un pb";
+                echo "impossible d ajouter cet enregistrement, video ou image trop volumineuse";
+                rrmdir($chemindossier);
+                include('nouvelitem.php');
+                exit;
             }
         }
         else {
@@ -104,7 +120,7 @@ else{
     exit;
 }
  
-
+    
 
     if (!empty($enchere) && !empty($meilleurof)) {
     $erreur .= "Vous ne pouvez pas choisir enchères et meilleur offre en même temps. <br>"; 
@@ -113,7 +129,7 @@ else{
        $erreur .= "Merci d'indiquer un prix d'achat immédiat. <br>"; 
    }
   
-    if ($enchere == "enchere" && empty($prix)) {
+    if ($enchere == "enchere" && empty($prix2)) {
        $erreur .= "Merci d'indiquer un prix d'enchère minimum. <br>";
    } 
     if (!empty($enchere) && empty($date1)) {
@@ -147,20 +163,34 @@ else{
     if(empty($achatim) && empty($meilleurof) && empty($enchere)){
         $erreur .= "Merci de choisir au moins un type de vente <br>";
     }
-    if (!is_numeric($prix))
+
+    if (!empty($prix) && !is_numeric($prix))
+    {
+        $erreur .= "Merci de saisir un prix valide.<br>";
+    }
+
+    if (!empty($prix2) && !is_numeric($prix2))
     {
         $erreur .= "Merci de saisir un prix valide.<br>";
     }
 
     $intvente = (int)$typevente;
+    $prix1 = (int)$prix;
+    $prix3 = (int)$prix2;
 
     
   
     if ($erreur == "") {
-       $sql = "INSERT INTO items (nomitem, description, chemindossier, typevente, prix, categorie, datefin, IDVendeur, avendre) VALUES ('$nom', '$description', '$chemindossier', '$intvente', '$prix', '$categorie', '$date2', '$variablesessionint', '$avendre1' )";
+        
+
+        
+       $sql = "INSERT INTO items (nomitem, description, chemindossier, typevente, prix, categorie, datefin, IDVendeur, avendre, prixench) VALUES ('$nom', '$description', '$chemindossier', '$intvente', '$prix1', '$categorie', '$date2', '$variablesessionint', '$avendre1', '$prix3')";
        $result = mysqli_query($db_handle, $sql);
        if (!$result){
-           die("impossible d ajouter cet enregistrement");
+           echo "impossible d ajouter cet enregistrement, video ou image trop volumineuse";
+           rrmdir($chemindossier);
+           include('nouvelitem.php');
+
        }
 
        echo '<div style="text-align: center";><h1>L\'item a bien été mis en vente !</h1></div> <br> <div style="text-align: center";><a href="index.php">Retour à lacceuil</a>';     

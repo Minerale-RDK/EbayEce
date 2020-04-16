@@ -4,6 +4,7 @@
             session_start(); 
 
         }
+        include("scriptencheres.php");
 ?>
 
 <link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -113,9 +114,9 @@
                 Catégories
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="ferraille.html">Ferraille ou Trésor</a>
-                <a class="dropdown-item" href="musee.html">Bon pour le Musée</a>
-                <a class="dropdown-item" href="accessoire.html">Accessoire VIP&ensp;<i class="fa fa-star" aria-hidden="true"></i></a>
+                <a class="dropdown-item" href="ferraille.php?cat=FoT">Ferraille ou Trésor</a>
+                <a class="dropdown-item" href="ferraille.php?cat=BpM">Bon pour le Musée</a>
+                <a class="dropdown-item" href="ferraille.php?cat=vip">Accessoire VIP&ensp;<i class="fa fa-star" aria-hidden="true"></i></a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="categorie.html">Autres Catégories</a>
                 </div>
@@ -127,11 +128,11 @@
                 Achat&ensp;
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="ferraille.html">Les Enchères</a>
+                <a class="dropdown-item" href="ferraille.php?cat=ench">Les Enchères</a>
                     
-                <a class="dropdown-item" href="musee.html">Achetez-le maintenant</a>
+                <a class="dropdown-item" href="ferraille.php?cat=atim">Achetez-le maintenant</a>
                     
-                <a class="dropdown-item" href="accessoire.html">Meilleures offres</a>
+                <a class="dropdown-item" href="ferraille.php?cat=mof">Meilleures offres</a>
                 
                     </div>
                 </li>
