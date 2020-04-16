@@ -94,26 +94,9 @@
             </div>
         </div>
     </div>
-    <footer class="page-footer"> 
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-12">
-                <h6 class="text-uppercase font-weight-bold">Information additionnelle</h6> 
-                <p>
-                    Blablalalalalalallalalalalalaalallalallalalalallalalalallalaallalal</p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                    <h6 class="text-uppercase font-weight-bold">Contact</h6> 
-                    <p>
-                        Blabla <br> email <br>
-                        number <br>
-                        number
-                    </p> 
-                </div>
-            </div>
-        <div class="footer-copyright text-center">&copy; 2020 Copyright | Droit d'auteur: Paul SENARD | Victor QUIDET | Solène HACOUN</div> 
-        </div>
-    </footer>
+<?php
+    include('footer.php');
+?>
 </body>
 </html>
 
