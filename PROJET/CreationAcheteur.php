@@ -1,62 +1,101 @@
 <?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
 
-$prenom = isset($_POST["Prénom"])? $_POST["Prénom"] : ""; 
-$nom = isset($_POST["Nom"])? $_POST["Nom"] : "";
-$login = isset($_POST["Identifiant"])? $_POST["Identifiant"] : "";
-$email = isset($_POST["email"])? $_POST["email"] : "";
-$pwd = isset($_POST["pwd"])? $_POST["pwd"] : "";
-$pwd2 = isset($_POST["pwd2"])? $_POST["pwd2"] : "";
-$cgv = isset($_POST["CGV"])? $_POST["CGV"] :"";
-$erreur = "";
-
-$database = "ebayece";
-
-$db_handle = mysqli_connect('localhost:3308', 'root', '');
-$db_found = mysqli_select_db($db_handle, $database);
-
-if($db_found){
-
-
- if ($prenom == "") { 
- $erreur .= "Prénom est vide. <br>";
- }
- if ($nom == "") {
- $erreur .= "Nom est vide. <br>"; 
-}
- if ($cgv =="") {
-     $erreur .= "Merci d'accepter les conditions générales de ventes. <br>";
- }
- if ($login == "") {
- $erreur .= "Identifiant est vide. <br>"; 
-}
- if ($email == "") {
- $erreur .= "E-mail est vide. <br>"; 
-}
- if ($pwd == "") {
-    $erreur .= "Mot de passe est vide. <br>"; 
-}
-}
-if ($pwd != $pwd2) {
-    $erreur .= "Les mots de passes sont différents. <br>";
-} 
-
-if ($erreur == "") {
-    $sqlInsert = "INSERT INTO acheteurs (login, pwd, Nom, Prenom, email) VALUES ('$login', '$pwd', '$nom', '$prenom', '$email')";
-    $result = mysqli_query($db_handle, $sqlInsert);
-    if (!$result){
-        die("impossible d ajouter cet enregistrement");
     }
-    session_start();
-        $_SESSION['login'] = $login;
-        $_SESSION['staut'] = "membre";
-    echo '<div style="text-align: center";><h1>Votre compte a bien été créer !</h1></div> <br> <div style="text-align: center";><a href="index.php">Retour à lacceuil</a>';
-    
-    
-}
-    else {
-    echo "Erreur : $erreur";
-    include('CreationAcheteur.html');
-    exit; 
-    }
-
 ?>
+<!DOCTYPE HTML>
+<html>
+<html>
+<head>
+<title>Inscription Acheteur</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/CreationVendeur.css" />
+</head>
+    
+    
+    <body>
+    <?php 
+            include ("menu.php");
+      ?>
+        
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-9 mx-auto" >
+          
+        <div class="card card-signin flex-row my-5" >
+          
+          <div class="card-body" >
+              
+            <h4 class="card-header text-center" >Bienvenue sur la page de création du Compte Acheteur</h4>
+              <br>
+              
+            <form class="col-md4 ml-auto mr-auto" action="upload_acheteur.php" method="post" enctype="multipart/form-data" >
+                
+              <div class="form-label-group">
+                 <label for="Prénom">Prénom</label>
+                <input type="text" class="form-control" name="Prénom" id="Prénom" aria-describedby="nameHelp" placeholder="Entrez votre prénom" required autofocus  ><br>
+                
+              </div>
+
+              <div class="form-label-group">
+                <label for="Nom">Nom</label>
+                <input type="text" class="form-control" name="Nom" id="Nom" aria-describedby="nameHelp" placeholder="Entrez votre nom" required autofocus ><br>
+              </div>
+                
+                <div class="form-label-group">
+                <label for="Nom">Identifiant</label>
+                <input type="text" class="form-control" name="Identifiant" id="Identifiant" aria-describedby="identifiantHelp" placeholder="Entrez votre login" required autofocus ><br>
+              </div>
+                
+                <div class="form-label-group">
+                <label for="Nom">Email</label>
+                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Entrez votre adresse email" required autofocus ><br>
+              </div>
+                
+                <div class="form-label-group">
+                <label for="Nom">Mot de passe</label>
+                <input type="password" class="form-control" name="pwd" id="pwd" aria-describedby="pwdHelp" placeholder="Entrez votre mot de passe" required autofocus >
+                <small class="form-text text-muted">
+                  Votre mot de passe doit faire au moins 8 caractères et contenir au moins une majuscule, un chiffre et un caractère spécial
+                </small><br>              
+              </div>
+                
+                <div class="form-label-group">
+                <label for="Nom">Confirmation mot de passe</label>
+                <input type="password" class="form-control" name="pwd2" id="pwd2" aria-describedby="pwd2Help" placeholder="Veuillez confimer votre mot de passe" required autofocus ><br>
+              </div>
+                    <br> <br>
+                
+    
+   <div for="categorie" class="form-label-group">            
+                    
+
+               <div>
+                     <input type="checkbox" id="CGV" name="CGV" value="CGV" required autofocus >
+                     <label for="CGV" style="font-size: small;">Acceptez vous les <a href="CGV.htlm">Conditions Générales de Vente </a></label>
+               </div>
+
+                <input type="submit" id="bttncreation" value="Créez votre compte" class="btn btn-lg btn-primary btn-block " target="blank">
+          <br>
+                
+                </div>
+                
+            
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </body>
+
+</html>

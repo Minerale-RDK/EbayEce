@@ -12,10 +12,10 @@
         <?php
         if (isset($_SESSION['login']))
         {
-            echo '<a class="navbar-brand" href="#">Bonjour  '.$_SESSION['login'].'</a>';
+            echo '<a class="navbar-brand">Bonjour  <strong>'.$_SESSION['login'].'</strong></a>';
         }
         else{
-            echo '<a class="navbar-brand" href="#">Bonjour.</a>';
+            echo '<a class="navbar-brand">Bonjour</a>';
         }           
         ?>
         <?php
@@ -87,7 +87,7 @@
                 else{
                     echo '<ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="login.php">
-                        Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
+                        Se Connecter&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
                     <li class="nav-item"><a class="nav-link">|</a></li>
                     <li class="nav-item"><a class="nav-link" href="login.php">
                         Panier&ensp; <i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>

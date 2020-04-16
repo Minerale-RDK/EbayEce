@@ -6,7 +6,6 @@ if(!isset($_SESSION)) {
 
 }
 
-// https://www.youtube.com/watch?v=kkkQoGEzP0w&t=411s
 
 $prenom = isset($_POST["Prénom"])? $_POST["Prénom"] : ""; 
 $nom = isset($_POST["Nom"])? $_POST["Nom"] : "";
@@ -15,7 +14,6 @@ $email = isset($_POST["email"])? $_POST["email"] : "";
 $pwd = isset($_POST["pwd"])? $_POST["pwd"] : "";
 $pwd2 = isset($_POST["pwd2"])? $_POST["pwd2"] : "";
 $cgv = isset($_POST["CGV"])? $_POST["CGV"] :"";
-$ban = isset($_POST["cover"])? $_POST["cover"] :"";
 
 $erreur = array();
 
@@ -60,32 +58,11 @@ foreach($table_verif as &$bdd){
     }
 }
     
-
-if(!empty($_FILES)){
-    $file_name = $_FILES['fichier']['name'];
-    $file_extension = strrchr($file_name,".");
-
-    $file_tmp_name = $_FILES['fichier']['tmp_name'];
-    $file_dest = 'files/'.$login;
-
-    $extensions_autorisees = array('.jpg', '.jpeg', '.png');
-
-    if($_FILES['fichier']['size']>1000000){
-        array_push($erreur, "La taille du fichier est supérieur à 1Mo");
-    }
-}
     
 
 if (sizeof($erreur) == 0) {
-    mkdir($file_dest, 0700);
-    $file_dest = $file_dest.'/'.$file_name;
-    if(move_uploaded_file($file_tmp_name, $file_dest)){
-        $file_name = 'avatar'.$file_extension;
-        $new_file_dest ='files/'.$login.'/'.$file_name;
-        rename($file_dest, $new_file_dest);
-    }
-    $sqlInsert = "INSERT INTO vendeurs(login, pwd, Nom, Prenom, email, name, file_url, cover_url) 
-    VALUES ('$login', '$pwd', '$nom', '$prenom', '$email', '$file_name','$new_file_dest','$ban')";
+    $sqlInsert = "INSERT INTO acheteurs(login, pwd, Nom, Prenom, email) 
+    VALUES ('$login', '$pwd', '$nom', '$prenom', '$email')";
     $result = mysqli_query($db_handle, $sqlInsert);
     if (!$result){
         die("impossible d ajouter cet enregistrement");
@@ -97,7 +74,7 @@ else {
     foreach($erreur as &$valeur){
         echo '<div class="alert alert-danger" role="alert">Erreur : '.$valeur.'</div>';
     }
-    include('CreationVendeur.php');
+    include('CreationAcheteur.php');
     exit; 
 }
 }
