@@ -1,8 +1,14 @@
+<?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+
+    }
+?>
 <!DOCTYPE HTML>
 <html>
-<html>
 <head>
-<title>Connexion Vendeur</title>
+<title>Inscription Vendeur</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -19,6 +25,7 @@
     <?php 
             include ("menu.php");
       ?>
+        
   <div class="container">
     <div class="row">
       <div class="col-lg-10 col-xl-9 mx-auto" >
@@ -27,50 +34,57 @@
           
           <div class="card-body" >
               
-            <h4 class="card-header text-center" >Bienvenue sur la page de création du compte vendeur</h4>
+            <h4 class="card-header text-center" >Bienvenue sur la page de création du Compte Vendeur</h4>
               <br>
               
             <form class="col-md4 ml-auto mr-auto" action="upload_vendeurs.php" method="post" enctype="multipart/form-data" >
                 
               <div class="form-label-group">
                  <label for="Prénom">Prénom</label>
-                <input type="text" class="form-control" name="Prénom" id="Prénom" aria-describedby="nameHelp" placeholder="Entrez votre prénom">
-                
+                <input type="text" class="form-control" name="Prénom" id="Prénom" aria-describedby="nameHelp" placeholder="Entrez votre prénom" required autofocus >
+                <br>
               </div>
 
               <div class="form-label-group">
                 <label for="Nom">Nom</label>
-                <input type="text" class="form-control" name="Nom" id="Nom" aria-describedby="nameHelp" placeholder="Entrez votre nom"><br>
+                <input type="text" class="form-control" name="Nom" id="Nom" aria-describedby="nameHelp" placeholder="Entrez votre nom" required autofocus ><br>
               </div>
                 
                 <div class="form-label-group">
                 <label for="Nom">Identifiant</label>
-                <input type="text" class="form-control" name="Identifiant" id="Identifiant" aria-describedby="identifiantHelp" placeholder="Entrez votre login"><br>
+                <input type="text" class="form-control" name="Identifiant" id="Identifiant" aria-describedby="identifiantHelp" placeholder="Entrez votre login" required autofocus ><br>
               </div>
                 
                 <div class="form-label-group">
                 <label for="Nom">Email</label>
-                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Entrez votre adresse email"><br>
+                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Entrez votre adresse email" required autofocus ><br>
               </div>
                 
                 <div class="form-label-group">
                 <label for="Nom">Mot de passe</label>
-                <input type="password" class="form-control" name="pwd" id="pwd" aria-describedby="pwdHelp" placeholder="Entrez votre mot de passe"><br>
+                <input type="password" class="form-control" name="pwd" id="pwd" aria-describedby="pwdHelp" placeholder="Entrez votre mot de passe" required autofocus >
+                <small class="form-text text-muted">
+                  Votre mot de passe doit faire au moins 8 caractères et contenir au moins une majuscule, un chiffre et un caractère spécial
+                </small><br>
               </div>
                 
                 <div class="form-label-group">
                 <label for="Nom">Confirmation mot de passe</label>
-                <input type="password" class="form-control" name="pwd2" id="pwd2" aria-describedby="pwd2Help" placeholder="Veuillez confimer votre mot de passe"><br>
+                <input type="password" class="form-control" name="pwd2" id="pwd2" aria-describedby="pwd2Help" placeholder="Veuillez confimer votre mot de passe" required autofocus><br>
               </div>
               
               <hr class="my-4">
             
-                <label ><dt>Importez votre photo de profil :</dt></label><br>
-                <input type="hidden" style="margin-top: 30px; ;" name="MAX_FILE_SIZE" value="100000">
-                Avatar : <input size="100" type="file" style="margin-top: 30px;" name="fichier" value=""><br>
+                <label for="fichier"><dt>Importez votre photo de profil :</dt></label>
+                <div class="custom-file">
+                  <input size="100" type="file" style="margin-top: 30px;" name="fichier" id="fichier" value="" accept="image/png, image/jpeg, image/jpg" required><br>
+                  <small class="form-text text-muted">
+                    Votre image doit faire moins de 1Mo.
+                  </small>
+                </div>
                 <br><br>
                 
-    <label ><dt>Choisissez votre fond préféré :</dt></label><br><br>            
+                <br><br> <label ><dt>Choisissez votre fond préféré :</dt></label><br><br>            
                
 <div class="row">
     
@@ -131,7 +145,7 @@
                     
 
                <div>
-                     <input type="checkbox" id="CGV" name="CGV" value="CGV">
+                     <input type="checkbox" id="CGV" name="CGV" value="CGV" required autofocus>
                      <label for="CGV" style="font-size: small;">Acceptez vous les <a href="CGV.htlm">Conditions Générales de Vente </a></label>
                </div>
 

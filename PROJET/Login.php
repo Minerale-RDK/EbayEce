@@ -1,3 +1,10 @@
+<?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+
+    }
+?>
 <html>
 <head>
 <title>EbayECE - Connexion</title>
@@ -40,11 +47,13 @@
                     <input type="submit" id="bttnconnex" value="Connexion" class="btn btn-lg btn-primary btn-block ">
                     
                 <br><br>
-                    
+                </form>
                      <h6 style="text-align: center" >Pas encore de compte ?</h6>
-                <a style="text-align: center" href="CreationVendeur.php"><p>Créer un compte</p></a>
-                 
-                       </form>
+                     <div style="text-align: center">
+                <a href="CreationVendeur.php">Créer un compte Vendeur</a>&ensp;
+                <a href="CreationAcheteur.php">Créer un compte Acheteur</a>
+                    </div>
+                       
                    </div>
                 </div>
             </div>
