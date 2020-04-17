@@ -8,7 +8,13 @@ include('header.php');
             include ('menu.php');
         ?>
        
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+       <br><br>
+       <div class="wrapper">
+    
+    <div class="row" >
+        <div style="margin-left: 40px" class="col" >
+        
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -34,6 +40,28 @@ include('header.php');
           <span class="sr-only">Next</span>
         </a>
     </div>
+            <br><br><br><br><br><br><br><br>
+        </div>
+    
+    
+    
+    <div style="margin-left: auto; margin-right: 40px" class="col" >
+    
+    <br>
+        <h5 style="text-align: center">Bienvenue dans notre vente aux enchères en lignes</h5><br><br>
+        <h6>Comment ca fonctionne ? </h6><br><br>
+        <p>Ici, vous pouvez découvrir vos articles ainsi que les achetez de plusieurs facons differentes, voici comment :
+        </p>
+        <ul>
+                <li>Choisissez votre faccon d'acheter: </li>
+            <li>Choisissez la catégorie</li>
+            
+            </ul>
+    
+    </div>        
+
+</div>
+    <br><br>
     <?php
    include('footer.php');
    ?>

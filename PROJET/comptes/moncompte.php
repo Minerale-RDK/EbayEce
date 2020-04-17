@@ -20,7 +20,7 @@
     <div class="contenu">
         <?php 
             echo '<img src="'.$_SESSION['fond'].'" id="entiere" class="img-thumbnail" alt="cover.jpg"> 
-            <img src="../files/'.$_SESSION['login'].'/avatar.jpg" id="img1" class="img-thumbnail" alt="avatar.jpg">';
+            <img src="../files/'.$_SESSION['login'].'/avatar" id="img1" class="img-thumbnail" alt="avatar.jpg">';
         ?>
     </div>
     <div class="objets">

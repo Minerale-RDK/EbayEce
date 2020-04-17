@@ -4,7 +4,7 @@
             session_start(); 
 
         }
-        include(''.$_SERVER['DOCUMENT_ROOT'].'/PROJET/bases/scriptencheres.php');
+        include('scriptencheres.php');
 ?>
 
 <link rel="stylesheet" type="text/css" href="/PROJET/css/styles.css"> 
@@ -64,14 +64,19 @@
                    <li class="nav-item"><a class="nav-link">|</a></li>
                    <li class="nav-item"><a class="nav-link" href="../items/panier.php">
                        Panier&ensp; <i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                   <li class="nav-item"><a class="nav-link">|</a></li>
-                   <li class="nav-item"><a class="nav-link" href="../comptes/admin.php">Admin</a></li>
+                       <li class="nav-item"><a class="nav-link">|</a></li>
+                   <li class="nav-item"><a class="nav-link" href="../comptes/deco.php">
+                       Déconnexion&ensp; <i class=" fa fa-power-off" aria-hidden="true"></i></a></li>
+
                </ul>';
                 }
                 elseif(isset($_SESSION['statut']) && $_SESSION['statut'] == "administrateur"){
                     echo '<ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="../comptes/adminPage.php">
                         Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
+                        <li class="nav-item"><a class="nav-link">|</a></li>
+                   <li class="nav-item"><a class="nav-link" href="../comptes/deco.php">
+                       Déconnexion&ensp; <i class=" fa fa-power-off" aria-hidden="true"></i></a></li>
                     <li class="nav-item"><a class="nav-link">|</a></li>
                     <li class="nav-item"><a class="nav-link" href="../comptes/adminPage.php">Admin</a></li>
                 </ul> ';
@@ -81,17 +86,16 @@
                    echo'<ul class="navbar-nav">
                    <li class="nav-item"><a class="nav-link" href="../comptes/moncompte.php">
                        Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
-                   <li class="nav-item"><a class="nav-link">|</a></li>
-                   <li class="nav-item"><a class="nav-link" href="../comptes/admin.php">Admin</a></li>
+                       <li class="nav-item"><a class="nav-link">|</a></li>
+                   <li class="nav-item"><a class="nav-link" href="../comptes/deco.php">
+                       Déconnexion&ensp; <i class=" fa fa-power-off" aria-hidden="true"></i></a></li>
+                   
                </ul>';
                 }
                 else{
                     echo '<ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="../comptes/login.php">
                         Se Connecter&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
-                    <li class="nav-item"><a class="nav-link">|</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../comptes/login.php">
-                        Panier&ensp; <i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
                     <li class="nav-item"><a class="nav-link">|</a></li>
                     <li class="nav-item"><a class="nav-link" href="../comptes/admin.php">Admin</a></li>
                 </ul> ';

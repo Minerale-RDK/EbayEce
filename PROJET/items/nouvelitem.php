@@ -1,5 +1,6 @@
 <?php
-include('../bases/header.php')
+include('../bases/header.php');
+
 ?>
    
     <script>
@@ -30,9 +31,15 @@ function myFunction2() {
     <body>
     <?php 
  
- if(!isset($_SESSION['statut']) || $_SESSION['statut'] != "administrateur" || $_SESSION['statut'] != "vendeur"){
+if(!isset($_SESSION['statut'])){
   echo "Merci de vous connecter à un compte vendeur";
-  include('../comptes/login.php');
+  header('location: ../comptes/login.php');
+  exit;
+}
+elseif($_SESSION['statut'] != "administrateur" && $_SESSION['statut'] != "vendeur")
+{
+  echo "Merci de vous connecter à un compte vendeur";
+  header('location: ../comptes/login.php');
   exit;
 }
 else{

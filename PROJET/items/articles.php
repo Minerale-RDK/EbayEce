@@ -75,7 +75,7 @@ h3{
 
             else
             {
-                echo '<h1>Ne joue pas avec l\'url ou j\'appelle la police de l\'internet !</h1>';
+                header('location: ../bases/index.php');
             }
 
             
@@ -98,9 +98,7 @@ h3{
                     <div class="thumbnail">
                         <a class="a1" href="produit.php?id='.$IDItem.'" target="_blank" style="text-decoration:none; color: #a20038; text-hover:black">
                             
-                            <img src="'.$chemindossier.'/photo0"   style="width:330px; height:200px" class="img-thumbnail" >';
-                            echo $chemindossier;
-                            echo '
+                            <img src="'.$chemindossier.'/photo0"   style="width:330px; height:200px" class="img-thumbnail" >
                         
                         <div class="caption" style="font-size:larger; text-align:center">
                         <p>'.$nomitem.'</p>

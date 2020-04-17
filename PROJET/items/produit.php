@@ -6,7 +6,7 @@ include('../bases/header.php');
 
         <?php 
 
-function dateDiff($date1, $date2){
+function dateDiff($date2, $date1){
   $diff = abs($date1 - $date2); // fonction de finalclap.com
   $retour = array();
 
