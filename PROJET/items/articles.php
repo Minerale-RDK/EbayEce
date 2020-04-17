@@ -1,5 +1,5 @@
 <?php
-include('../bases/header.php');
+    include('../bases/header.php');
 ?>
         
 <style>     
@@ -98,7 +98,7 @@ h3{
                     <div class="thumbnail">
                         <a class="a1" href="produit.php?id='.$IDItem.'" target="_blank" style="text-decoration:none; color: #a20038; text-hover:black">
                             
-                            <img src="'.$chemindossier.'/photo0"   style="width:330px; height:200px" class="img-thumbnail" >
+                            <img src="'.$chemindossier.'/photo0.jpg"   style="width:330px; height:200px" class="img-thumbnail" >
                         
                         <div class="caption" style="font-size:larger; text-align:center">
                         <p>'.$nomitem.'</p>
@@ -106,12 +106,13 @@ h3{
                         </a>
                         </div>
                         </div>';
+                        
                     }
                     elseif(($i-1)%3 == 0){
                         echo '<div class="col-md-4">
                         <div class="thumbnail">
                         <a class="a1" href="produit.php?id='.$IDItem.'" target="_blank" style="text-decoration:none; color: #a20038; text-hover:black">
-                        <img src="'.$chemindossier.'/photo0" class="img-thumbnail" style="width:330px; height:200px;">
+                        <img src="'.$chemindossier.'/photo0.jpg" class="img-thumbnail" style="width:330px; height:200px;">
                         ';
                             echo $chemindossier;
                             echo '
@@ -126,7 +127,7 @@ h3{
                         echo '<div class="col-md-4">
                         <div class="thumbnail">
                         <a class="a1" href="produit.php?id='.$IDItem.'" target="_blank" style="text-decoration:none; color: #a20038; text-hover:black">
-                        <img src="'.$chemindossier.'/photo0" class="img-thumbnail" style="width:330px; height:200px;">';
+                        <img src="'.$chemindossier.'/photo0.jpg" class="img-thumbnail" style="width:330px; height:200px;">';
                         echo $chemindossier;
                         echo '
                         <div class="caption" style="font-size:larger; text-align:center; ">

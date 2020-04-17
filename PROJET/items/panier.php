@@ -30,9 +30,13 @@
         include ("../bases/menu.php");
         $ids = array();
         $prix_panier = 0;
-        for($i=0; $i<sizeof($_SESSION['panier']); $i++){
+        if(!empty($_SESSION['panier'])){
+
+          for($i=0; $i<sizeof($_SESSION['panier']); $i++){
             array_push($ids, $_SESSION['panier'][$i]['IDItem']);
             $prix_panier += $_SESSION['panier'][$i]['prix'];
+        }
+
         }
         
     ?>
@@ -60,9 +64,12 @@
         <br>
         <br><h4 style="text-align: center">Vous n\'avez aucun produit dans votre panier </h4>';
         }else {
-            
+            $_SESSION['paiement'] = array();
+            $_SESSION['paiement']['IDItem'] = [];
+            $_SESSION['paiement']['IDItem'] = $ids;
+            $_SESSION['paiement']['prix'] = $prix_panier;
             echo '<div class="col;" style="text-align: center">
-            <a href="../paiement/carte_credit.php?prix='.$prix_panier.'"  class="btn btn-outline-info" role="button" style="text-align: center">Terminer la commande</a>
+            <a href="../paiement/carte_credit.php"  class="btn btn-outline-info" role="button" style="text-align: center">Terminer la commande</a>
             &ensp;
             <a href="categorie.html"  class="btn btn-outline-info" role="button" style="text-align: center">Retourner aux achats</a>
     
