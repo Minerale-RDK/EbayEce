@@ -123,7 +123,7 @@ function dateDiff($date2, $date1){
               if ($data['typevente'] == "1"){
                 echo '<u>Méthode d\'achat </u>: Achat immédiat <br><br>
                 Prix : '.$data['prix'].' € <br><br>
-                <a href="panier.html?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
+                <a href="addpanier.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
                 </p>';
               }
               elseif($data['typevente'] == "2"){
@@ -155,14 +155,14 @@ function dateDiff($date2, $date1){
 
                 echo ''.$array['day'].' jours '.$array['hour'].' heures et '.$array['minute'].' minutes pour enchérir <br><br>
                 <u>Prix pour achat immédiat</u>: '.$data['prix'].' € &nbsp
-                <a href="panier.html?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
+                <a href="addpanier.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
                 </p>'; 
 
               }
               elseif($data['typevente'] == "5"){
                 echo '<u>Méthodes d\'achat </u>: Achat immédiat ou meilleur offre <br><br>
                 <u>Prix pour achat immédiat</u>: '.$data['prix'].' € &nbsp
-                <a href="panier.html?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
+                <a href="addpanier.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
                 </p><br><br><a href="faireoffre.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Faire une offre</a><br><br>'
                 ; 
 
