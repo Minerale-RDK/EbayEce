@@ -59,7 +59,7 @@
                 if (isset($_SESSION['statut']) && $_SESSION['statut'] == "acheteur")
                 {
                    echo'<ul class="navbar-nav">
-                   <li class="nav-item"><a class="nav-link" href="#">
+                   <li class="nav-item"><a class="nav-link" href="../comptes/moncompte_acheteur.php">
                        Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
                    <li class="nav-item"><a class="nav-link">|</a></li>
                    <li class="nav-item"><a class="nav-link" href="../items/panier.php">
@@ -84,7 +84,7 @@
                 elseif (isset($_SESSION['statut']) && $_SESSION['statut'] == "vendeur")
                 {
                    echo'<ul class="navbar-nav">
-                   <li class="nav-item"><a class="nav-link" href="../comptes/moncompte.php">
+                   <li class="nav-item"><a class="nav-link" href="../comptes/moncompte_vendeur.php">
                        Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
                        <li class="nav-item"><a class="nav-link">|</a></li>
                    <li class="nav-item"><a class="nav-link" href="../comptes/deco.php">
