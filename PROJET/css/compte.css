@@ -1,0 +1,19 @@
+.objets{
+    margin: 30px;
+}
+
+#cover{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+#avatar{
+
+    width: 220px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left: -8%;
+    margin-top: -8.5%;
+}
