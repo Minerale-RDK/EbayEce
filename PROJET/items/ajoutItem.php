@@ -1,7 +1,5 @@
 <?php
 
-
-
     if(!isset($_SESSION)) 
     { 
         session_start(); 
@@ -42,8 +40,9 @@ $meilleurof = isset($_POST["meilleurof"])? $_POST["meilleurof"] : "";
 $achatim = isset($_POST["achatim"])? $_POST["achatim"] :"";
 $prix = isset($_POST["prix"])? $_POST["prix"] :"";
 $date1 = isset($_POST["date1"])? $_POST["date1"] :"";
-$erreur = "";
+$erreur = array();
 $prix2 = isset($_POST["prix2"])? $_POST["prix2"] :"";
+
 
 $date2 = strtotime($date1);
 $date3 =time();
@@ -85,68 +84,69 @@ if($_FILES['photo']['name'][0] != "" || $_FILES['photo']['name'][1] != "" || $_F
             {
                 
                 if($file_extension == ".jpg" || $file_extension == ".jpeg" || $file_extension == ".png" || $file_extension == ".JPG" || $file_extension == ".JPEG" || $file_extension == ".PNG"){
-                    
-                    $file_name = 'photo'.$a.$file_extension;
-                    $new_file_dest ='../files/imgitem/'.$timestamp.'/'.$file_name;
-                    rename($file_dest, $new_file_dest);
-                    //echo $a;
-                    $a++;
-                    //echo 'Fichier enregistré avec succès<br>';
+                    if($_FILES['photo']['size'][$i]>1000000){
+                        array_push($erreur, "La taille d'une photo est supérieur à 1Mo");
+                        rrmdir($chemindossier);
+                    }else{
+
+                        $file_name = 'photo'.$a.$file_extension;
+                        $new_file_dest ='../files/imgitem/'.$timestamp.'/'.$file_name;
+                        rename($file_dest, $new_file_dest);
+                        $a++;
+
+                    }
                 }
                 else{
-                     $file_name = 'video'.$i.$file_extension;
-                    $new_file_dest ='../files/imgitem/'.$timestamp.'/'.$file_name;
-                    rename($file_dest, $new_file_dest);
-                   // echo 'Fichier enregistré avec succès<br>';
+                    if($_FILES['photo']['size'][$i]>2000000){
+                        array_push($erreur, "La taille de la vidéo est supérieur à 2Mo");
+                        rrmdir($chemindossier);
+                    }else{
+                        $file_name = 'video'.$i.$file_extension;
+                        $new_file_dest ='../files/imgitem/'.$timestamp.'/'.$file_name;
+                        rename($file_dest, $new_file_dest);
+                    }
                     
                 }
-            }
-            else 
-            {
-                echo "impossible d ajouter cet enregistrement, video ou image trop volumineuse";
-                rrmdir($chemindossier);
-                include('nouvelitem.php');
-                exit;
             }
         }
         else {
-            echo '<strong>Seuls les photos aux formats jpg, jpeg ou png sont acceptées</strong>';
-
+            array_push($erreur, "Uniquement les photos jpg, jpeg et png sont acceptées et les vidéos aux formats mp4, avi et mkv");         
             
-            
-               rrmdir($newdir); 
-            include('nouvelitem.php');
-            
-            exit;
+            rrmdir($newdir); 
         }
     } 
     }   
 
 }
 else{
-    echo "Merci de mettre au moins une photo ou vidéo";
-    include('nouvelitem.php');
-    exit;
+    array_push($erreur, "Merci de mettre au moins une photo ou vidéo");
 }
  
     
 
     if (!empty($enchere) && !empty($meilleurof)) {
-    $erreur .= "Vous ne pouvez pas choisir enchères et meilleur offre en même temps. <br>"; 
+    array_push($erreur, "Vous ne pouvez pas choisir enchères et meilleur offre en même temps."); 
    }
     if ($achatim == "achatim" && empty($prix)) {
-       $erreur .= "Merci d'indiquer un prix d'achat immédiat. <br>"; 
+        array_push($erreur, "Merci d'indiquer un prix d'achat immédiat."); 
    }
   
     if ($enchere == "enchere" && empty($prix2)) {
-       $erreur .= "Merci d'indiquer un prix d'enchère minimum. <br>";
+        array_push($erreur, "Merci d'indiquer un prix d'enchère minimum.");
    } 
     if (!empty($enchere) && empty($date1)) {
-    $erreur .= "Merci d'indiquer une date de fin pour les enchères. <br>";
+        array_push($erreur,"Merci d'indiquer une date de fin pour les enchères.");
+    }
+
+    if(!empty($enchere) && !empty($achatim) && !empty($prix2) && !empty($prix))
+    {
+        if($prix <= $prix2){
+            array_push($erreur, "Le prix de l'achat immédiat doit être supérieur à celui de l'enchère");
+        }
     }
 
     if($date1 != "" && $date2 < $date3) {
-        $erreur .= "La date de fin d'enchere est inférieure à la date actuelle. <br>";
+        array_push($erreur, "La date de fin d'enchere est inférieure à la date actuelle. ");
     }
 
     if(!empty($achatim) && empty($meilleurof) && empty($enchere)){
@@ -170,17 +170,17 @@ else{
     }
 
     if(empty($achatim) && empty($meilleurof) && empty($enchere)){
-        $erreur .= "Merci de choisir au moins un type de vente <br>";
+        array_push($erreur,"Merci de choisir au moins un type de vente ");
     }
 
     if (!empty($prix) && !is_numeric($prix))
     {
-        $erreur .= "Merci de saisir un prix valide.<br>";
+        array_push($erreur, "Merci de saisir un prix valide.");
     }
 
     if (!empty($prix2) && !is_numeric($prix2))
     {
-        $erreur .= "Merci de saisir un prix valide.<br>";
+        array_push($erreur, "Merci de saisir un prix valide.");
     }
 
     $intvente = (int)$typevente;
@@ -189,27 +189,36 @@ else{
 
     
   
-    if ($erreur == "") {
+    if (empty($erreur)) {
         
 
         
        $sql = "INSERT INTO items (nomitem, description, chemindossier, typevente, prix, categorie, datefin, IDVendeur, avendre, prixench) VALUES ('$nom', '$description', '$chemindossier', '$intvente', '$prix1', '$categorie', '$date2', '$variablesessionint', '$avendre1', '$prix3')";
        $result = mysqli_query($db_handle, $sql);
        if (!$result){
-           echo "impossible d ajouter cet enregistrement, video ou image trop volumineuse";
+           echo '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+           &ensp;impossible d ajouter cet enregistrement, video ou image trop volumineuse</div>';
            rrmdir($chemindossier);
            include('nouvelitem.php');
-
+           exit;
        }
-
-       echo '<div style="text-align: center";><h1>L\'item a bien été mis en vente !</h1></div> <br> <div style="text-align: center";><a href="../bases/index.php">Retour à lacceuil</a>';     
+       $sql = "SELECT * FROM items
+       ORDER BY IDItem DESC
+       LIMIT 1";
+       $req = mysqli_query($db_handle, $sql);
+       $data = mysqli_fetch_assoc($req);
+       echo '<script language="Javascript"> document.location.replace("produit.php?id='.$data['IDItem'].'&valid=1"); </script>';
+       exit;
    }
-       else {
-       echo "Erreur : $erreur";
+    else {
+        foreach($erreur as &$valeur){
+            echo '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            &ensp;Erreur : '.$valeur.'</div>';
+        }
        rrmdir($chemindossier);
        include('nouvelitem.php');
        exit; 
-       }
+    }
 
 
 ?>
