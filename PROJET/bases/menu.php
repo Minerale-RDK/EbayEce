@@ -72,13 +72,11 @@
                 }
                 elseif(isset($_SESSION['statut']) && $_SESSION['statut'] == "administrateur"){
                     echo '<ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="../comptes/adminPage.php">
+                    <li class="nav-item"><a class="nav-link" href="../comptes/moncompte_admin.php">
                         Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
                         <li class="nav-item"><a class="nav-link">|</a></li>
                    <li class="nav-item"><a class="nav-link" href="../comptes/deco.php">
                        Déconnexion&ensp; <i class=" fa fa-power-off" aria-hidden="true"></i></a></li>
-                    <li class="nav-item"><a class="nav-link">|</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../comptes/adminPage.php">Admin</a></li>
                 </ul> ';
                 }
                 elseif (isset($_SESSION['statut']) && $_SESSION['statut'] == "vendeur")
@@ -96,8 +94,6 @@
                     echo '<ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="../comptes/login.php">
                         Se Connecter&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
-                    <li class="nav-item"><a class="nav-link">|</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../comptes/admin.php">Admin</a></li>
                 </ul> ';
                 }
                 ?>
