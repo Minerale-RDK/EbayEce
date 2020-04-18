@@ -18,19 +18,12 @@ if ($db_found)
 {
     $id = $_GET['id'];
     if(isset($_GET['id'])){
-        for($i=0; $i<sizeof($_SESSION['panier']); $i++){
-            if ($id == $_SESSION['panier'][$i]['IDItem']){
-                echo '<div class="alert alert-danger" role="alert"> Ce produit est déjà dans votre panier </div>';
-                include('produit.php');
-                exit();
-            }
-        }
         $sql = "SELECT * FROM items WHERE IDItem = '$id'";
         $req = mysqli_query($db_handle, $sql);
         $data = mysqli_fetch_assoc($req);
         $result = mysqli_query($db_handle, $sql);
         if (mysqli_num_rows($result) == 0) {}
-        $taille = sizeof($_SESSION['panier']);
+        $taille = sizeof($_SESSION['panier']) + 1;
         $donnees_item = array();
         $tampon = [];
         foreach($valeurs as &$valeur){
@@ -39,10 +32,9 @@ if ($db_found)
 
         }
         $_SESSION['panier'][$taille] = $tampon;
+        print_r($_SESSION['panier'][$taille]['IDItem']);
 
-        echo '<div class="alert alert-success" role="alert"> Ce produit est déjà dans votre panier </div>';
-        include('produit.php');
-        exit();
+        die("Le produit a bien été ajouté à votre panier");
     }else {
         die("Vous n'avez pas sélectionné de produits");
     }

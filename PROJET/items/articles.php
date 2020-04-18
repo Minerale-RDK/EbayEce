@@ -113,7 +113,6 @@ h3{
                         <a class="a1" href="produit.php?id='.$IDItem.'" target="_blank" style="text-decoration:none; color: #a20038; text-hover:black">
                         <img src="'.$chemindossier.'/photo0" class="img-thumbnail" style="width:330px; height:200px;">
                         ';
-                            echo $chemindossier;
                             echo '
                         <div class="caption" style="font-size:larger; text-align:center; ">
                         <p>'.$nomitem.'</p>
@@ -127,7 +126,6 @@ h3{
                         <div class="thumbnail">
                         <a class="a1" href="produit.php?id='.$IDItem.'" target="_blank" style="text-decoration:none; color: #a20038; text-hover:black">
                         <img src="'.$chemindossier.'/photo0" class="img-thumbnail" style="width:330px; height:200px;">';
-                        echo $chemindossier;
                         echo '
                         <div class="caption" style="font-size:larger; text-align:center; ">
                         <p>'.$nomitem.'</p>

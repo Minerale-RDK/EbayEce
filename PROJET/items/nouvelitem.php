@@ -16,10 +16,16 @@ function myFunction() {
 function myFunction2() {
   var checkBox2 = document.getElementById("enchere");
   var text2 = document.getElementById("prix2");
+  var text3 = document.getElementById("date1");
+  var text4 = document.getElementById("date2");
   if (checkBox2.checked == true){
     text2.style.display = "block";
+    text3.style.display = "block";
+    text4.style.display = "block";
   } else {
      text2.style.display = "none";
+     text3.style.display = "none";
+     text4.style.display = "none";
   }
 }
 </script>
@@ -30,14 +36,15 @@ function myFunction2() {
 
     <body>
     <?php 
+
  
-if(!isset($_SESSION['statut'])){
-  echo "Merci de vous connecter à un compte vendeur";
-  header('location: ../comptes/login.php');
-  exit;
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+
 }
-elseif($_SESSION['statut'] != "administrateur" && $_SESSION['statut'] != "vendeur")
-{
+ 
+if(!isset($_SESSION['statut']) || $_SESSION['statut'] == "acheteur"){
   echo "Merci de vous connecter à un compte vendeur";
   header('location: ../comptes/login.php');
   exit;
@@ -100,15 +107,14 @@ else{
                     <input type="checkbox" name="enchere" id="enchere" value="enchere" onclick="myFunction2()">
                     <label for="enchere">Enchères</label><br>
 
-                    <label for="date1"> Date de fin de l'enchère</label>
-                    <input type="date" name="date1" id="date1" value=""><br><br>
-                    
-                    
                     <input type="checkbox" name="achatim" id="achatim" value="achatim" onclick="myFunction()">
-                    <label for="achatim">Achat immédiat</label>
+                    <label for="achatim">Achat immédiat</label><br>
 
                     <input type="checkbox" name="meilleurof" id="meilleurof" value="meilleurof">
                     <label for="meilleurof">Meilleure offre</label><br>
+
+                    <p id="date2" style="display:none;"> Date de fin de l'enchère</p>
+                    <input type="datetime-local" name="date1" id="date1" value="" style="display:none;">
 
                 </div>
 </div>

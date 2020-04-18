@@ -1,41 +1,51 @@
 <?php
 include('../bases/header.php');
 ?>
+<head>
+ <script type="text/javascript">
+    //http://blog.rolandl.fr/1465-bootstrap-une-fenetre-modale-a-la-suppression-des-lignes-de-vos-tableaux
+        $(document).ready(function () {
+        var theHREF;
+
+        $(".confirmModalLink").click(function(e) {
+            e.preventDefault();
+            theHREF = $(this).attr("href");
+            $("#confirmModal").modal("show");
+        });
+
+        $("#confirmModalYes").click(function(e) {
+            window.location.href = theHREF;
+        });
+    });
+    </script>
+</head> 
 
 <body>
 
         <?php 
 
-function dateDiff($date2, $date1){
-  $diff = abs($date1 - $date2); // fonction de finalclap.com
-  $retour = array();
 
-  $tmp = $diff;
-  $retour['second'] = $tmp % 60;
 
-  $tmp = floor( ($tmp - $retour['second']) /60 );
-  $retour['minute'] = $tmp % 60;
+            $dateajd = time();
 
-  $tmp = floor( ($tmp - $retour['minute'])/60 );
-  $retour['hour'] = $tmp % 24;
-
-  $tmp = floor( ($tmp - $retour['hour'])  /24 );
-  $retour['day'] = $tmp;
-
-  return $retour;
-}
-
-          $dateajd = time();
-
+           
             include ("../bases/menu.php");
             $id = $_GET['id'];
 
+            
+            if(!isset($_SESSION['statut']))
+            {
+              $_SESSION['statut'] = "";
+            }
+
             include ("../bases/bdd.php");
+            
 
 
         if ($db_found)  
         {
-            
+          
+
             $sql = "SELECT * FROM items WHERE IDItem = '$id'";
             $req = mysqli_query($db_handle, $sql);
 
@@ -47,6 +57,14 @@ function dateDiff($date2, $date1){
 
             $files2 = glob("$dossier/*video*"); 
             $compteur2 = count($files2);
+
+          $datefinenchere = $data['datefin'];
+          $datefinenchere2 = date("Y-m-d H:i:s", $datefinenchere);
+          $dateajd2 = date("Y-m-d H:i:s", $dateajd);
+          $datefinenchere3 = new DateTime($datefinenchere2);
+          $dateajd3 = new DateTime($dateajd2);
+
+          $interval = $datefinenchere3->diff($dateajd3);
             
             
             echo '<br><br><div class="row">
@@ -114,58 +132,140 @@ function dateDiff($date2, $date1){
                 <h2> '.$data['nomitem'].' </h2>
                 <p style="text-align: justify"><br>
               <u>Description :</u> '.$data['description'].'
-              <br><br>';
+              <br></p>';
               if ($compteur2 != 0)
               {
                 $extfile2 = $files2[0];
                 echo '<a href="'.$extfile2.'">Lien vers la vidéo disponible</a><br><br>';
               }
+
               if ($data['typevente'] == "1"){
                 echo '<u>Méthode d\'achat </u>: Achat immédiat <br><br>
-                Prix : '.$data['prix'].' € <br><br>
-                <a href="addpanier.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
-                </p>';
+                Prix : '.$data['prix'].' € <br><br>';
+
+                if($_SESSION['statut'] == "acheteur"){
+                  echo '<a href="panier.html?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
+                  </p>';
+                }
+
+                elseif($_SESSION['statut'] == "" || $_SESSION['statut'] == "vendeur"){
+                  echo '<a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
+                  </p>';
+                }
+
+                elseif($_SESSION['statut'] == "administrateur"){
+                  echo '<a href="destruction.php?id='.$id.'" 
+                  class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
+                  <i class="fa fa-trash" aria-hidden="true" ></i></a>
+                  ';
+                }
+
+                
               }
               elseif($data['typevente'] == "2"){
+
                 echo '<u>Méthode d\'achat </u>: Enchères <br><br>
-                <u>Prix de départ des enchères</u>: '.$data['prixench'].' € <br><br>
+                <u>Prix de départ des enchères</u>: '.$data['prixench'].' € <br><br>';
+
+                if($_SESSION['statut'] == "acheteur")
+                {
+                  echo '
                 <a href="encherir.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Enchèrir</a><br><br>
                 ';
-               
-                $datefinenchere = $data['datefin'];
-                echo 'Il reste ';
-                $array = dateDiff($dateajd, $datefinenchere);
+                
+                }
 
-                echo ''.$array['day'].' jours '.$array['hour'].' heures et '.$array['minute'].' minutes pour enchérir </p>'; 
-
-              }elseif($data['typevente'] == "3"){
-                echo '<u>Méthode d\'achat </u>: Meilleur offre <br><br>
-                <a href="faireoffre.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Faire une offre</a><br><br>
+                elseif($_SESSION['statut'] == "" || $_SESSION['statut'] == "vendeur"){
+                  echo '
+                <a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Enchèrir</a><br><br>
                 ';
+                }
+                elseif($_SESSION['statut'] == "administrateur"){
+                  echo '<a href="destruction.php?id='.$id.'" 
+                  class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
+                  <i class="fa fa-trash" aria-hidden="true" ></i></a><br><br>
+                  ';
+                }
+
+                echo 'Il reste ';
+                echo $interval->format('%m mois %d jours %H heures et %i minutes pour enchérir'); echo '</p>';}
+
+
+              elseif($data['typevente'] == "3"){
+                echo '<u>Méthode d\'achat </u>: Meilleur offre <br><br>';
+
+                if($_SESSION['statut'] == "acheteur"){
+                  echo '<a href="../achat/offre.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Faire une offre</a><br><br>
+                  ';
+                 }
+                 elseif($_SESSION['statut'] == "" || $_SESSION['statut'] == "vendeur")
+                 {
+                  echo '<a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Faire une offre</a><br><br>
+                  '; }
+                  elseif($_SESSION['statut'] == "administrateur"){
+                    echo '<a href="destruction.php?id='.$id.'" 
+                    class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
+                    <i class="fa fa-trash" aria-hidden="true" ></i></a>
+                    </p>';
+                  }  
               }
               elseif($data['typevente'] == "4"){
                 echo '<u>Méthodes d\'achat </u>: Achat immédiat ou enchère <br><br>
-                <u>Prix de départ des enchères</u>: '.$data['prixench'].' € &nbsp
-                <a href="ecnherir.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Enchèrir</a><br><br>
-                ';
-               
-                $datefinenchere = $data['datefin'];
-                echo 'Il reste ';
-                $array = dateDiff($dateajd, $datefinenchere);
+                <u>Prix de départ des enchères</u>: '.$data['prixench'].' € &nbsp';
+                if($_SESSION['statut'] == "acheteur"){
+                    echo '<a href="ecnherir.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Enchèrir</a><br><br>
+                    ';
+                }
 
-                echo ''.$array['day'].' jours '.$array['hour'].' heures et '.$array['minute'].' minutes pour enchérir <br><br>
-                <u>Prix pour achat immédiat</u>: '.$data['prix'].' € &nbsp
-                <a href="addpanier.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
-                </p>'; 
+                elseif($_SESSION['statut'] == "" || $_SESSION['statut'] == "vendeur"){
+                  echo '<a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Enchèrir</a><br><br>
+                    ';
+                   }
+                   elseif($_SESSION['statut'] == "administrateur"){
+                    echo '<a href="destruction.php?id='.$id.'" 
+                    class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
+                    <i class="fa fa-trash" aria-hidden="true" ></i></a>
+                    </p>';
+                  }
+                   echo 'Il reste ';
+                   echo $interval->format('%m mois %d jours %H heures et %i minutes pour enchérir'); echo '</p>';
+
+                echo'
+                <u>Prix pour achat immédiat</u>: '.$data['prix'].' € &nbsp';
+                if($_SESSION['statut'] == "acheteur"){
+                  echo'
+                  <a href="panier.html?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
+                  </p>';
+                }
+                elseif($_SESSION['statut'] == "" || $_SESSION['statut'] == "vendeur"){
+                  echo'
+                  <a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
+                  </p>';
+                }
+
+                
 
               }
               elseif($data['typevente'] == "5"){
-                echo '<u>Méthodes d\'achat </u>: Achat immédiat ou meilleur offre <br><br>
-                <u>Prix pour achat immédiat</u>: '.$data['prix'].' € &nbsp
-                <a href="addpanier.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
-                </p><br><br><a href="faireoffre.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Faire une offre</a><br><br>'
-                ; 
+                
+                isset($_SESSION['statut']) ? $_SESSION['statut'] : "";
 
+                echo '<u>Méthodes d\'achat </u>: Achat immédiat ou meilleur offre <br><br>
+                <u>Prix pour achat immédiat</u>: '.$data['prix'].' € &nbsp <br><br>';
+                if($_SESSION['statut'] == "acheteur"){
+                  echo '<a href="panier.html?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
+                  </p> <br><a href="../achat/offre.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Faire une offre</a><br><br>';
+                }
+                elseif($_SESSION['statut'] == "" || $_SESSION['statut'] == "vendeur"){
+                  echo '<a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
+                  </p><br><a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Faire une offre</a><br><br>';
+                }
+                elseif($_SESSION['statut'] == "administrateur"){
+                  echo '<a href="destruction.php?id='.$id.'" 
+                  class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
+                  <i class="fa fa-trash" aria-hidden="true" ></i></a>
+                  </p>';
+                }
               }
   
             echo'</div>
@@ -174,10 +274,33 @@ function dateDiff($date2, $date1){
         }
         ?>
 
+ <!-- Modal confirmation de supression -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Supression de l'article</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sûr de vouloir supprimer l'article ?
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-secondary" data-dismiss="modal" >Annuler</a>
+        <?php echo'
+        <a href="destruction.php?id='.$id.'" class="btn btn-primary" id="confirmModalYes" >Supprimer</a>'; ?>
+      </div>
+    </div>
+  </div>
+</div>
+    
     <br><br>
     <?php
    include('../bases/footer.php');
    ?>
+
 
 </body>
 </html>

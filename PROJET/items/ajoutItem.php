@@ -180,7 +180,7 @@ else{
 
     if (!empty($prix2) && !is_numeric($prix2))
     {
-        $erreur .= "Merci de saisir un prix valide.<br>";
+        $erreur .= "Merci de saisir un prix valide 2.<br>";
     }
 
     $intvente = (int)$typevente;
