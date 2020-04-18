@@ -19,8 +19,8 @@
     
     <div class="contenu">
         <?php 
-            echo '<img src="'.$_SESSION['fond'].'" id="entiere" class="img-thumbnail" alt="cover.jpg"> 
-            <img src="../files/'.$_SESSION['login'].'/avatar" id="img1" class="img-thumbnail" alt="avatar.jpg">';
+            echo '<img src="../'.$_SESSION['fond'].'" id="entiere" class="img-thumbnail" alt="cover.jpg"> 
+            <img src="../'.$_SESSION['avatar'].'" id="img1" class="img-thumbnail" alt="avatar">';
         ?>
     </div>
     <div class="objets">

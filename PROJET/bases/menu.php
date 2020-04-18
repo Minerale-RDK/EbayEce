@@ -1,10 +1,10 @@
 <?php
-        if(!isset($_SESSION)) 
-        { 
-            session_start(); 
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
 
-        }
-        include('scriptencheres.php');
+    }
+    include('scriptencheres.php');
 ?>
 
 <link rel="stylesheet" type="text/css" href="/PROJET/css/styles.css"> 
@@ -104,7 +104,7 @@
                  </div>
     </nav>
     <div>
-        <a href="/PROJET/bases/index.php"><img src="/PROJET/images/logo.png" class="logo-accueil"></a>
+        <a href="../bases/index.php"><img src="../images/logo.png" class="logo-accueil"></a>
     </div>
     <nav class="navbar navbar-expand-md navbar-light">
         <div class="navbar-second">
@@ -118,9 +118,9 @@
                 Catégories
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="../items/articles?cat=FoT">Ferraille ou Trésor</a>
-                <a class="dropdown-item" href="../items/articles?cat=BpM">Bon pour le Musée</a>
-                <a class="dropdown-item" href="../items/articles?cat=vip">Accessoire VIP&ensp;<i class="fa fa-star" aria-hidden="true"></i></a>
+                <a class="dropdown-item" href="../items/articles.php?cat=FoT">Ferraille ou Trésor</a>
+                <a class="dropdown-item" href="../items/articles.php?cat=BpM">Bon pour le Musée</a>
+                <a class="dropdown-item" href="../items/articles.php?cat=vip">Accessoire VIP&ensp;<i class="fa fa-star" aria-hidden="true"></i></a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="categorie.html">Autres Catégories</a>
                 </div>

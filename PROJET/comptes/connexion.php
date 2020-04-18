@@ -3,7 +3,10 @@
 $login = isset($_POST["identifiant"]) ? $_POST["identifiant"] : "";
 $pass = isset($_POST["mdp"]) ? $_POST["mdp"] : "";
 
-require('../bases/bdd.php');
+$database = "ebayece";
+
+$db_handle = mysqli_connect('127.0.0.1', 'root', 'root');
+$db_found = mysqli_select_db($db_handle, $database);
 
 if ($db_found)
 {
@@ -40,8 +43,7 @@ if ($db_found)
             $req = mysqli_query($db_handle, $sql);
             $data = mysqli_fetch_assoc($req);
             $_SESSION['id'] = $data['IDAcheteur'];
-            header('location: ../bases/index.php');
-            echo 'Vous êtes bien identifié.';
+            include('moncompte.php');
         }
     }
     else {
@@ -52,10 +54,10 @@ if ($db_found)
         $sql = "SELECT * FROM vendeurs WHERE login='".$login."'";
         $req = mysqli_query($db_handle, $sql);
         $data = mysqli_fetch_assoc($req);
+        $_SESSION['avatar'] = $data['file_url'];
         $_SESSION['fond'] = $data['cover_url'];
         $_SESSION['id'] = $data['IDVendeur'];
-        header('location: moncompte.php');
-        echo 'Vous êtes bien identifié.';
+        include('moncompte.php');
     }
 }
 else {

@@ -16,6 +16,11 @@ $valeurs = array('IDItem','nomitem', 'description', 'chemindossier', 'typevente'
 'prix', 'categorie', 'datefin', 'IDVendeur', 'avendre');
 if ($db_found)  
 {
+    if($_SESSION['statut'] == 'vendeur'){
+        echo '<div class="alert alert-danger" role="alert"> Vous ne pouvez pas acheter car vous êtes en compte vendeur.</div>';
+        include('produit.php');
+        exit();
+    }
     $id = $_GET['id'];
     if(isset($_GET['id'])){
         $sql = "SELECT * FROM items WHERE IDItem = '$id'";
