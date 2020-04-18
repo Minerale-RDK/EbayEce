@@ -9,7 +9,7 @@ if(!isset($_SESSION)) {
 // https://www.youtube.com/watch?v=kkkQoGEzP0w&t=411s
 
 $prenom = isset($_POST["Prénom"])? $_POST["Prénom"] : ""; 
-$nom = isset($_POST["Nom"])? $_POST["Nom"] : "";
+$nom = strtoupper(isset($_POST["Nom"])? $_POST["Nom"] : "");
 $login = isset($_POST["Identifiant"])? $_POST["Identifiant"] : "";
 $email = isset($_POST["email"])? $_POST["email"] : "";
 $pwd = isset($_POST["pwd"])? $_POST["pwd"] : "";

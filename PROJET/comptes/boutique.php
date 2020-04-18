@@ -7,7 +7,7 @@ function item($data, $vendu){
     if($vendu == 0){
 
         echo '<a href="../items/produit.php?id='.$data['IDItem'].'">
-            <img src="'.$data['chemindossier'].'/photo0.jpg"  class="img-thumbnail" >
+            <img src="'.$data['chemindossier'].'/photo0.jpg"  style="width:100%; " class="img-thumbnail" >
             </a>
             </div>
             <div class="card-body">
@@ -20,7 +20,7 @@ function item($data, $vendu){
 
     }elseif($vendu == 1){
 
-        echo '<img src="'.$data['chemindossier'].'/photo0.jpg"  class="img-thumbnail" >
+        echo '<img src="'.$data['chemindossier'].'/photo0.jpg" style="width:100%;" class="img-thumbnail" >
             </div>
             <div class="card-body">
             <h5 class="card-title">'.$data['nomitem'].'</h5>
@@ -39,10 +39,10 @@ function maboutique($titre, $message_error, $result, $vendu=0){
 
     $i=4;
     $nbr=mysqli_num_rows($result);
-    echo '<h1>'.$titre.' ('.$nbr.')</h1><br>';
+    echo '<h1 style="margin-left: 15px;">'.$titre.' ('.$nbr.')</h1><br>';
             
     if ($nbr == 0) {
-        echo "<h5>'.$message_error.'</h5>";
+        echo '<h5 style="margin-left: 30px;">'.$message_error.'</h5>';
     } 
     else 
     {
@@ -53,11 +53,6 @@ function maboutique($titre, $message_error, $result, $vendu=0){
                 echo '<div class="card-deck">';
                 item($data, $vendu);
                         
-            }
-            elseif(($i-1)%4 == 0 || ($i-2)%4 == 0){
-
-                item($data, $vendu);
-
             }
             else{
                 

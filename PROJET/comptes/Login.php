@@ -1,7 +1,6 @@
 <?php
     include ("../bases/header.php");
 ?>
-
 <body>
         <?php 
             if($_GET['erreur']==1){
@@ -23,13 +22,13 @@
                        
              <div class="form-label-group">
                  <label for="identifiant">Identifiant:</label>
-                <input type="text" class="form-control" name="identifiant" id="identifiant" aria-describedby="nameHelp" placeholder="Identifiant">
+                <input type="text" class="form-control" name="identifiant" id="identifiant" aria-describedby="nameHelp" placeholder="Identifiant" required autofocus>
                 <br>
               </div>
             
             <div class="form-label-group">
                 <label for="mdp">Mot de passe :</label>
-                <input type="text" class="form-control" name="mdp" id="mdp" aria-describedby="nameHelp" placeholder="Mot de passe"><br>
+                <input type="password" class="form-control" name="mdp" id="mdp" aria-describedby="nameHelp" placeholder="Mot de passe" required autofocus><br>
               </div>
                
                     <input type="submit" id="bttnconnex" value="Connexion" class="btn btn-lg btn-primary btn-block ">

@@ -30,8 +30,20 @@ if ($db_found)
         $req = mysqli_query($db_handle, $sql);
         $data = mysqli_fetch_assoc($req);
         if($data['pwd'] != $pass) {
+            $sql = "SELECT pwd FROM admin WHERE login='".$login."'";
+            $req = mysqli_query($db_handle, $sql);
+            $data = mysqli_fetch_assoc($req);
+            if($data['pwd'] != $pass) {
             echo '<script language="Javascript"> document.location.replace("login.php?erreur=1"); </script>';
             exit;
+            }else{
+                session_start();
+                $statut = "administrateur";
+                $_SESSION['login'] = $login;
+                $_SESSION['statut'] = $statut;
+                echo '<script language="Javascript"> document.location.replace("../comptes/moncompte_admin.php"); </script>';
+                exit;
+            }
         }
         else {
             session_start();
