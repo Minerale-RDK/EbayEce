@@ -71,7 +71,7 @@
             echo '<div class="col;" style="text-align: center">
             <a href="../paiement/carte_credit.php"  class="btn btn-outline-info" role="button" style="text-align: center">Terminer la commande</a>
             &ensp;
-            <a href="categorie.html"  class="btn btn-outline-info" role="button" style="text-align: center">Retourner aux achats</a>
+            <a href="index.php"  class="btn btn-outline-info" role="button" style="text-align: center">Retourner aux achats</a>
     
                </div>
     
