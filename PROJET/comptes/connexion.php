@@ -30,8 +30,7 @@ if ($db_found)
         $req = mysqli_query($db_handle, $sql);
         $data = mysqli_fetch_assoc($req);
         if($data['pwd'] != $pass) {
-            echo '<p>Mauvais identifiant ou mot de passe.</p>';
-            include('login.php');
+            echo '<script language="Javascript"> document.location.replace("login.php?erreur=1"); </script>';
             exit;
         }
         else {
@@ -43,7 +42,8 @@ if ($db_found)
             $req = mysqli_query($db_handle, $sql);
             $data = mysqli_fetch_assoc($req);
             $_SESSION['id'] = $data['IDAcheteur'];
-            include('moncompte.php');
+            echo '<script language="Javascript"> document.location.replace("../bases/index.php"); </script>';
+            exit;
         }
     }
     else {
@@ -57,7 +57,8 @@ if ($db_found)
         $_SESSION['avatar'] = $data['file_url'];
         $_SESSION['fond'] = $data['cover_url'];
         $_SESSION['id'] = $data['IDVendeur'];
-        include('moncompte.php');
+        echo '<script language="Javascript"> document.location.replace("moncompte_vendeur.php"); </script>';
+        exit;
     }
 }
 else {

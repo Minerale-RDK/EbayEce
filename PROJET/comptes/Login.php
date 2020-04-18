@@ -2,9 +2,12 @@
     include ("../bases/header.php");
 ?>
 
-
 <body>
         <?php 
+            if($_GET['erreur']==1){
+                echo '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+             &ensp;Identifiant ou mot de passe invalide.</div>';
+              }
             include ("../bases/menu.php");
         ?>
     <div class="container"> 
