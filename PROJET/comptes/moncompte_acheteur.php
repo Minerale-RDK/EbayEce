@@ -74,8 +74,8 @@
             }
             $i++;
             $nbr = $nbr - 1;
-            if($nbr == 0 || $nbr%4 == 0){
-                echo '</div>';
+            if($nbr == 0 || $i%4 == 0){
+                echo '</div><br>';
             }
         }
     }
@@ -134,8 +134,8 @@
             }
             $i++;
             $nbr = $nbr - 1;
-            if($nbr == 0 || $nbr%4 == 0){
-                echo '</div>';
+            if($nbr == 0 || $i%4 == 0){
+                echo '</div><br>';
             }
 
         }

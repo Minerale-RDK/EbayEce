@@ -6,7 +6,7 @@ function item($data, $vendu, $meilleureoffre=0 ,$login="", $id_ach=0){
     $files = glob("$dossier/*photo*"); 
     
     $extfile = $files[0];
-    echo '<div class="card" style="max-width: 25%;">
+    echo '<div class="card" style="max-width: 23%;">
                 <div class="card-img-top">';
     if($vendu == 0){
 
@@ -118,8 +118,8 @@ function maboutique($titre, $message_error, $result, $vendu=0){
             }
             $i++;
             $nbr = $nbr - 1;
-            if($nbr == 0 || $nbr%4 == 0){
-                echo '</div>';
+            if($nbr == 0 || $i%4 == 0){
+                echo '</div><br>';
             }
             
         }  

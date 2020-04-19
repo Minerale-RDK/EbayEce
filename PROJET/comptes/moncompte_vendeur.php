@@ -91,6 +91,10 @@
                     echo '<div class="card-deck">';
                     item($data, $vendu, $b ,$a ,$c);
                             
+                }elseif(($i-4%4) == 0){
+                    item($data, $vendu, $b ,$a ,$c);
+                    echo '</div>';
+
                 }
                 else{
                     
@@ -99,9 +103,10 @@
                 }
                 $i++;
                 $nbr = $nbr - 1;
-                if($nbr == 0 || $nbr%4 == 0){
-                    echo '</div>';
+                if($nbr == 0 || $i%4 == 0){
+                    echo '</div><br>';
                 }
+                
 
             }
 
@@ -148,8 +153,8 @@
             }
             $i++;
             $nbr = $nbr - 1;
-            if($nbr == 0 || $nbr%4 == 0){
-                echo '</div>';
+            if($nbr == 0 || $i%4 == 0){
+                echo '</div><br>';
             }
         }
     }
