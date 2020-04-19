@@ -86,7 +86,7 @@
                     <a href="produit.html">
                     <img src="'.$_SESSION['panier'][$i]['chemindossier'].'/photo0.jpg" alt="Nature" id ="itemImage" style="height : 200px; max-width: 400px;">
                     </a>
-                    <label for="itemImage" style="width: 600px; margin-left : 10%; font-size: 35px; ">&ensp;'.$_SESSION['panier'][$i]['nomitem'].'</label>
+                    <label for="itemImage" style="width: 600px; margin-top: -10%; margin-left : 10%; font-size: 35px; ">&ensp;'.$_SESSION['panier'][$i]['nomitem'].'</label>
                     <label for="itemImage" style=" margin-left : 10%; font-size: 30px; ">Prix : '.$_SESSION['panier'][$i]['prix'].' €</label>
                     <a href="deletepanier.php?id='.$i.'" 
                     class="confirmModalLink" data-toggle="modal" data-target="#exampleModal" style="float : right;">Supprimer&ensp;
