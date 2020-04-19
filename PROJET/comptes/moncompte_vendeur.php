@@ -64,15 +64,18 @@
             $id_item = array();
 
             while ($data = mysqli_fetch_assoc($result)) {
-                array_push($id_item, array($data['IDItem'], $data['tour'], $data['IDAcheteur']));
+                array_push($id_item, array($data['IDItem'], $data['tour'], $data['IDAcheteur'],$data['prixprop']));
             }
             $id_verif = array();
-            foreach($id_item as list($a, $b, $c)){
+            foreach($id_item as list($a, $b, $c, $prix)){
                 $sql = "SELECT * FROM items WHERE IDItem = $a AND avendre = 1";
                 $result = mysqli_query($db_handle, $sql);
                 if(mysqli_num_rows($result) != 0){
 
-                    array_push($id_verif, array($data['login'] ,$b, $c));
+                    $sql2 = "SELECT login FROM acheteurs WHERE IDAcheteur = $c";
+                    $result = mysqli_query($db_handle, $sql2);
+                    $data = mysqli_fetch_assoc($result);
+                    array_push($id_verif, array($data['login'] ,$b, $c, $prix));
             
                 }
             }
@@ -83,23 +86,19 @@
             }else{
             echo '<h1 style="margin-left: 15px;">'.$titre.' ('.sizeof($id_verif) .')</h1><br>';
             $nbr = sizeof($id_verif);
-            foreach($id_verif as list($a, $b, $c)){
+            foreach($id_verif as list($a, $b, $c, $prix)){
                 $result = mysqli_query($db_handle, $sql);
                 $data = mysqli_fetch_assoc($result);
 
                 if ($i%4 == 0){
 
                     echo '<div class="card-deck">';
-                    item($data, $vendu, $b ,$a ,$c);
+                    item($data, $vendu, $b ,$a ,$c, $prix);
                             
-                }elseif(($i-4%4) == 0){
-                    item($data, $vendu, $b ,$a ,$c);
-                    echo '</div>';
-
                 }
                 else{
                     
-                    item($data, $vendu, $b ,$a ,$c);
+                    item($data, $vendu, $b ,$a ,$c ,$prix);
 
                 }
                 $i++;
