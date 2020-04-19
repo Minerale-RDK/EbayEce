@@ -52,6 +52,7 @@
         while ($data = mysqli_fetch_assoc($result)) {
             array_push($id_item, array($data['IDItem']));
         }
+        $nbr = sizeof($id_item);
         echo '<h1 style="margin-left: 15px;">'.$titre.' ('.sizeof($id_item).')</h1><br>';
         foreach($id_item as &$a){
             $sql = "SELECT * FROM items WHERE IDItem = $a AND avendre = 1";
@@ -117,6 +118,7 @@
     
         }else{
         echo '<h1 style="margin-left: 15px;">'.$titre.' ('.sizeof($id_verif) .')</h1><br>';
+        $nbr = $id_verif;
         foreach($id_verif as list($a, $b)){
             $result = mysqli_query($db_handle, $sql);
             $data = mysqli_fetch_assoc($result);
