@@ -81,6 +81,7 @@
                 maboutique($titre, $msg_erreurb, $result);
 
             }else{
+            $nbr = sizeof($id_verif);
             echo '<h1 style="margin-left: 15px;">'.$titre.' ('.sizeof($id_verif) .')</h1><br>';
             foreach($id_verif as list($a, $b, $c)){
                 $result = mysqli_query($db_handle, $sql);
@@ -131,6 +132,7 @@
         while ($data = mysqli_fetch_assoc($result)) {
             array_push($id_item, array($data['IDItem'], $data['IDAcheteur']));
         }
+        $nbr = sizeof($id_item);
         echo '<h1 style="margin-left: 15px;">'.$titre.' ('.sizeof($id_item).')</h1><br>';
         foreach($id_item as list($a, $login)){
             $sql = "SELECT * FROM items WHERE IDItem = $a AND avendre = 1";

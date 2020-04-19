@@ -8,21 +8,25 @@ if(!isset($_SESSION)){
 
 echo '<body>';
 
-$montant2 = isset($_POST["montant"]) ? $_POST["montant"] : "";
+$montant2 = isset($_POST["montant"]) ? $_POST["montant"] : "inutile";
 
 $montant = (int)$montant2;
 
-$idItem = isset($_GET['id'])? $_GET['id'] : "";
+$idItem1 = isset($_GET['id'])? $_GET['id'] : "";
 $idCustomer = isset($_GET['idach'])? $_GET['idach'] : "";
+$idItem = (int)$idItem1;
 
-
-if($montant2 == "" || !is_numeric($montant))
+if(!isset($_POST['Accepter']) && !isset($_POST['Refuser'])){
+    if($montant2 == "" || !is_numeric($montant))
 {
     echo '<div class="alert alert-danger" role="alert">Erreur : Merci de rentrer un montant valide.</div>';
     include('offre.php');
     exit;
 }
-else{
+
+}
+
+
 
     require('../bases/bdd.php');
 
@@ -40,12 +44,15 @@ else{
             $resultRechercheOffre = mysqli_query($db_handle, $sqlRechercheOffre);
             $dataOffre = mysqli_fetch_assoc($resultRechercheOffre);
 
-            $sqlRechercheItem = "SELECT IDVendeur FROM items WHERE IDItem = '".$idItem."'";// on a toutes les données relatives à l'item
+            $sqlRechercheItem = "SELECT IDVendeur, nomitem FROM items WHERE IDItem = '".$idItem."'";// on a toutes les données relatives à l'item
             $resultRechercheItem = mysqli_query($db_handle, $sqlRechercheItem);
             $dataItem = mysqli_fetch_assoc($resultRechercheItem);
 
-            $idVendeur = $dataItem['IDVendeur']; //On récupére l'id du vendeur
-            $idAcheteur = $_SESSION['id']; //On récupére l'id de l'acheteur
+            $idVendeur1 = $dataItem['IDVendeur']; //On récupére l'id du vendeur
+            $idAcheteur1 = $_SESSION['id']; //On récupére l'id de l'acheteur
+
+            $idVendeur = (int)$idVendeur1;
+            $idAcheteur = (int)$idAcheteur1;
 
             $sqlRechercheVendeur = "SELECT Prenom, email FROM vendeurs WHERE IDVendeur = '".$idVendeur."'";//On a toutes les données du vendeur
             $resultRechercheVendeur =mysqli_query($db_handle, $sqlRechercheVendeur);
@@ -56,16 +63,16 @@ else{
             $dataAcheteur = mysqli_fetch_assoc($resultRechercheAcheteur);
 
 
-            if(empty($dataRechercheOffre)){
 
-                echo "'.$montant.' montant '.$idAcheteur.' id acheteur '.$idItem.' id item '.$idVendeur.' id vendeur" ;
+
+            if(empty($dataOffre)){
 
                 
-                $insertNewOffre = "INSERT INTO meilleuroffre (nbtry, prixprop, IDAcheteur, IDItem, IDVendeur, tour) VALUES ('1', '$montant', '$idAcheteur, '$idItem', '$idVendeur', 2)";
+                $insertNewOffre = "INSERT INTO meilleuroffre (nbtry, prixprop, IDAcheteur, IDItem, IDVendeur, tour, accepte) VALUES (1, '$montant', '$idAcheteur', '$idItem', '$idVendeur', 2, 0)";
                 $resultInsertNew = mysqli_query($db_handle, $insertNewOffre);
 
                 if(!$resultInsertNew){
-                    echo '<div class="alert alert-danger" role="alert">Erreur : Erreur lors de l\insertion dans la base de données.</div>';
+                    echo '<div class="alert alert-danger" role="alert">Erreur : Erreur lors de l\'insertion dans la base de données.</div>';
                     include('offre.php');
                     exit;
                 }
@@ -83,6 +90,10 @@ else{
 
             }
             elseif(isset($_POST['Accepter'])){
+
+                echo "test 1";
+
+
                 $sqlAccept = "UPDATE meilleuroffre SET accepte ='1' WHERE IDAcheteur = '".$idAcheteur."' AND IDItem = '".$idItem."'";
                 $resultAccept = mysqli_query($db_handle, $sqlAccept);
                 if(!$resultAccept){
@@ -113,6 +124,8 @@ else{
                 }
                 }
             elseif(isset($_POST['CO'])){
+
+                echo "test3";
                 $nbTry2 = $dataOffre['nbtry'];
                 $nbTry = (int)$nbTry2;
                 $nbTry++;
@@ -147,19 +160,20 @@ else{
                 }
             }
 
-            }
-    
         }
         elseif($_SESSION['statut'] == "vendeur" || $_SESSION['statut'] == "administrateur"){
+
 
             $sqlRechercheOffre = "SELECT * FROM meilleuroffre WHERE IDAcheteur = '".$idCustomer."' AND IDItem = '".$idItem."'";//toutes les données de l'offre
             $resultRechercheOffre = mysqli_query($db_handle, $sqlRechercheOffre);
             $dataOffre = mysqli_fetch_assoc($resultRechercheOffre);
 
+
             $sqlRechercheItem = "SELECT * FROM items WHERE IDItem = '".$idItem."'";// on a toutes les données relatives à l'item
             $resultRechercheItem = mysqli_query($db_handle, $sqlRechercheItem);
             $dataItem = mysqli_fetch_assoc($resultRechercheItem);
             
+
             if($_SESSION['statut'] == "vendeur"){
                 $idVendeur = $_SESSION['id'];
             }
@@ -176,6 +190,8 @@ else{
             $dataAcheteur = mysqli_fetch_assoc($resultRechercheAcheteur);
 
             if(isset($_POST['Accepter'])){
+                $idAcheteur1 = $dataAcheteur['IDAcheteur'];
+                $idAcheteur = (int)$idAcheteur1;
                 $sqlAccept = "UPDATE meilleuroffre SET accepte ='1' WHERE IDAcheteur = '".$idAcheteur."' AND IDItem = '".$idItem."'";
                 $resultAccept = mysqli_query($db_handle, $sqlAccept);
                 if(!$resultAccept){
@@ -208,7 +224,9 @@ else{
                 }
 
             }
-            elseif(isset($_POST['CO'])){
+            elseif(isset($_POST['CO2'])){
+
+                echo"test6";
                 $nbTry2 = $dataOffre['nbtry'];
                 $nbTry = (int)$nbTry2;
                 $nbTry++;
@@ -229,12 +247,13 @@ else{
 
         }
 
+
     include('../bases/footer.php');
 
 
     }
 
-
+ 
 
 
 

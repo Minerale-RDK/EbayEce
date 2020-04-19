@@ -144,7 +144,7 @@ include('../bases/menu.php');
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Valider</button>
+                    <button type="submit" class="btn btn-primary" value="Valider"></input>
                     </div>
                     </div>
                     </div>
@@ -215,9 +215,7 @@ include('../bases/menu.php');
                     <form method="post" action="traitementoffre.php?id='.$id.'"> 
                     <div class="input-group col-md-6" >
                     <div>
-                    <button type="submit" name="Accepter" class="btn btn-primary test">
-                    Accepter l\'offre
-                    </button>
+                    <input type="submit" name="Accepter" class="btn btn-primary test" value="Accepter"></input>
                     </div>
                     <br><br><p>Ou <u>faire une contre-offre :</u></p><br>
                     <div class="input-group ">
@@ -225,10 +223,11 @@ include('../bases/menu.php');
                     <div class="input-group-append">
                     <span class="input-group-text">€</span>
                     </div>
+                    </div>
                     <div>
-                    <br><button type="submit" name="CO" class="btn btn-primary">
-                    Soumettre votre offre
-                    </button>
+                    <br>
+                    <input type="submit" name="CO" class="btn btn-primary" value="Soumettre votre offre"></input>
+                    </div>
                     </div>
                     </div>
                     </form>';
@@ -241,14 +240,10 @@ include('../bases/menu.php');
                     <form method="post" action="traitementoffre.php?id='.$id.'">
                     <div class="input-group col-md-12" >
                     <div>
-                    <button type="submit" name="Accepter" class="btn btn-primary test">
-                    Accepter l\'offre
-                    </button>
+                    <input type="submit" name="Accepter" class="btn btn-primary test value="Accepter l\'offre"></input>
                     </div>
                     <br><br><p>Ou <u>Refuser :</u> Si vous refusez, les négociations s\'arrêtent et vous ne pourrez plus négocier pour cet article.</p><br>
-                    <br><button type="submit" name="refuser" class="btn btn-danger">
-                    Refuser
-                    </button>
+                    <br><input type="submit" name="refuser" class="btn btn-danger" value="Refuser">
                     </form>';
                   }
                   elseif ($data3['IDAcheteur'] == $idVisiteur && $data3['accepte'] == "0" && $_SESSION['statut'] == "acheteur" && $data3['nbtry'] == "11"){
@@ -266,13 +261,12 @@ include('../bases/menu.php');
 
                   elseif($data3['IDVendeur'] == $idVisiteur && $data3['tour'] == "2" && $data3['accepte'] == "0" && $_SESSION['statut'] == "vendeur"){
                     //Si c'est le tour du vendeur et qu'on est pas dans la dernière négociation possible
-                    echo '<p style="margin-left : 14px">L\'acheteur vous a proposé une contre-offre. Le montant de cette contre-offre est de '.$data3['prixprop'].' €.<br><u>Vous pouvez :</u> </p>
+                    echo '<p style="margin-left : 14px">L\'acheteur vous a proposé une offre. Le montant de cette offre est de '.$data3['prixprop'].' €.<br><u>Vous pouvez :</u> </p>
                     <form method="post" action="traitementoffre.php?idach='.$IDGetAcheteur.'&id='.$id.'">
                     <div class="input-group col-md-6" >
                     <div>
-                    <button type="submit" name="Accepter" class="btn btn-primary test">
-                    Accepter l\'offre
-                    </button>
+                    <input type="submit" name="Accepter" class="btn btn-primary test" value="Accepter"></input>
+
                     </div>
                     <br><br><p>Ou <u>faire une contre-offre :</u></p><br>
                     <div class="input-group ">
@@ -281,9 +275,7 @@ include('../bases/menu.php');
                     <span class="input-group-text">€</span>
                     </div>
                     <div>
-                    <br><button type="submit" name="CO" class="btn btn-primary">
-                    Soumettre votre offre
-                    </button>
+                    <br><input type="submit" name="CO2" class="btn btn-primary" value="Soumettre votre offre">
                     </div>
                     </div>
                     </form>';
@@ -294,9 +286,8 @@ include('../bases/menu.php');
                     <form method="post" action="traitementoffre.php?idach='.$IDGetAcheteur.'&id='.$id.'">
                     <div class="input-group col-md-6" >
                     <div>
-                    <button type="submit" name="Accepter" class="btn btn-primary test">
-                    Accepter l\'offre
-                    </button>
+                    <input type="submit" name="Accepter" class="btn btn-primary test" value="Accepter"></input>
+ 
                     </div>
                     <br><br><p>Ou <u>faire une contre-offre :</u> Attention, dernière offre possible. Si l\'acheteur refuse, les négociations seront closes.</p><br>
                     <div class="input-group ">
@@ -305,9 +296,7 @@ include('../bases/menu.php');
                     <span class="input-group-text">€</span>
                     </div>
                     <div>
-                    <br><button type="submit" name="CO" class="btn btn-primary">
-                    Soumettre votre offre
-                    </button>
+                    <br><input type="submit" name="CO" class="btn btn-primary" value="Soumettre votre offre"></input>
                     </div>
                     </div>
                     </form>';

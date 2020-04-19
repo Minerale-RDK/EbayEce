@@ -13,9 +13,6 @@ include('../bases/header.php');
             $("#confirmModal").modal("show");
         });
 
-
-
-
         $("#confirmModalYes").click(function(e) {
             window.location.href = theHREF;
         });
@@ -138,7 +135,6 @@ if(isset($_GET['valid']) && $_GET['valid']==1){
                   
             <div class="col-sm-4">
                 <h2> '.$data['nomitem'].' </h2>
-                <a href="../comptes/vendeur_compte.php?id='.$data['IDVendeur'].'"> Visiter le compte du vendeur</a>
                 <p style="text-align: justify"><br>
               <u>Description :</u> '.$data['description'].'
               <br></p>';
@@ -237,7 +233,7 @@ if(isset($_GET['valid']) && $_GET['valid']==1){
                     </p>';
                   }
                   elseif($_SESSION['statut'] == "vendeur" && $_SESSION['id'] == $data['IDVendeur']){
-                    echo 'Merci de passer par votre page <a href="../comptes/moncompte.php">mon compte</a> pour gérer vos négociations <br><br>
+                    echo 'Merci de passer par vos <a href="../comptes/moncompte_vendeur.php">négociations en cours</a> pour gérer vos négociations <br><br>
                     <a href="destruction.php?id='.$id.'" 
                   class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
                   <i class="fa fa-trash" aria-hidden="true" ></i></a>
@@ -326,7 +322,7 @@ if(isset($_GET['valid']) && $_GET['valid']==1){
                   </p>';
                 }
                 elseif($_SESSION['statut'] == "vendeur" && $_SESSION['id'] == $data['IDVendeur']){
-                  echo 'Merci de passer par votre page <a href="../comptes/moncompte.php">mon compte</a> pour gérer vos négociations<br><br>
+                  echo 'Merci de passer par vos <a href="../comptes/moncompte_vendeur.php">négociations en cours</a> pour gérer vos négociations<br><br>
                   <a href="destruction.php?id='.$id.'" 
                   class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
                   <i class="fa fa-trash" aria-hidden="true" ></i></a>

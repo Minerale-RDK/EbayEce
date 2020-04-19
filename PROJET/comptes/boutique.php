@@ -48,9 +48,9 @@ function item($data, $vendu, $meilleureoffre=0 ,$login="", $id_ach=0){
             <small class="text-muted">';
         if($meilleureoffre == 1 || $meilleureoffre == 2){
             echo'Meilleure offre en cours : le vendeur ';
-            if($meilleureoffre == 1){
+            if($meilleureoffre == 2){
                 echo 'est entrain d\'étudier votre offre';
-            }elseif($meilleureoffre == 2){
+            }elseif($meilleureoffre == 1){
                 echo 'vous a envoyé une contre offre';
             }
         }elseif($meilleureoffre == 3){
@@ -70,9 +70,9 @@ function item($data, $vendu, $meilleureoffre=0 ,$login="", $id_ach=0){
             </div>
             <div class="card-footer">
             <small class="text-muted">'.$login;
-            if($meilleureoffre == 1){
+            if($meilleureoffre == 2){
                 echo ' vous a envoyé une offre';
-            }elseif($meilleureoffre == 2){
+            }elseif($meilleureoffre == 1){
                 echo ' est entrain d\'étudier votre offre';
             }
         }elseif($meilleureoffre == 3){
