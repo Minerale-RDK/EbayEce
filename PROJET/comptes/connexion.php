@@ -5,7 +5,8 @@ $pass = isset($_POST["mdp"]) ? $_POST["mdp"] : "";
 
 $database = "ebayece";
 
-require('../bases/bdd.php');
+$db_handle = mysqli_connect('127.0.0.1', 'root', 'root');
+$db_found = mysqli_select_db($db_handle, $database);
 
 if ($db_found)
 {
@@ -68,7 +69,7 @@ if ($db_found)
         $_SESSION['avatar'] = $data['file_url'];
         $_SESSION['fond'] = $data['cover_url'];
         $_SESSION['id'] = $data['IDVendeur'];
-        echo '<script language="Javascript"> document.location.replace("moncompte_vendeur.php"); </script>';
+        echo '<script language="Javascript"> document.location.replace("../comptes/moncompte_acheteur.php"); </script>';
         exit;
     }
 }

@@ -121,7 +121,7 @@
 
     $titre = "En attente du paiement de l'acheteur";
 
-    $vendu = 4;
+    $vendu = 3;
 
     if(mysqli_num_rows($result) != 0){
 
@@ -129,7 +129,11 @@
         $id_item = array();
 
         while ($data = mysqli_fetch_assoc($result)) {
-            array_push($id_item, array($data['IDItem'], $data['IDAcheteur']));
+            $idacht = $data['IDAcheteur'];
+            $sql2 = "SELECT login FROM acheteurs WHERE IDAcheteur = $idacht";
+            $result = mysqli_query($db_handle, $sql2);
+            $data2 = mysqli_fetch_assoc($result);
+            array_push($id_item, array($data['IDItem'], $data2['login']));
         }
         echo '<h1 style="margin-left: 15px;">'.$titre.' ('.sizeof($id_item).')</h1><br>';
         $nbr = sizeof($id_item);
