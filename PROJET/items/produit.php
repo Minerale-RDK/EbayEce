@@ -5,6 +5,10 @@ include('../bases/header.php');
 <body>
 
         <?php 
+        if($_GET['valid']==1){
+          echo '<div class="alert alert-success" role="alert"><i class="fa fa-check" aria-hidden="true"></i>
+        &ensp;Votre produit est maintenant en vente !</div>';
+        }
 
 function dateDiff($date2, $date1){
   $diff = abs($date1 - $date2); // fonction de finalclap.com
@@ -112,6 +116,7 @@ function dateDiff($date2, $date1){
                   
             <div class="col-sm-4">
                 <h2> '.$data['nomitem'].' </h2>
+                <a href="../comptes/vendeur_compte.php?id='.$data['IDVendeur'].'"> Visiter le compte du vendeur</a>
                 <p style="text-align: justify"><br>
               <u>Description :</u> '.$data['description'].'
               <br><br>';
