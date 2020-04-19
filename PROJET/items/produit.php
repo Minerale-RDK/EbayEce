@@ -13,6 +13,9 @@ include('../bases/header.php');
             $("#confirmModal").modal("show");
         });
 
+
+
+
         $("#confirmModalYes").click(function(e) {
             window.location.href = theHREF;
         });
@@ -135,6 +138,7 @@ if(isset($_GET['valid']) && $_GET['valid']==1){
                   
             <div class="col-sm-4">
                 <h2> '.$data['nomitem'].' </h2>
+                <a href="../comptes/vendeur_compte.php?id='.$data['IDVendeur'].'"> Visiter le compte du vendeur</a>
                 <p style="text-align: justify"><br>
               <u>Description :</u> '.$data['description'].'
               <br></p>';

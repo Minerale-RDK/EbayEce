@@ -11,6 +11,12 @@ hr{
     background-color: rgb(126, 25, 25);
     border: none; /*on supprime le style par défaut*/
 }
+.page-footer a
+        {
+            color: ghostwhite;
+            font-family: 'Playfair Display', serif;
+  
+        }
 .nav-link, .navbar-brand {
     color: #000;
     cursor: pointer; 
@@ -117,20 +123,4 @@ hr{
     } 
 }
 
-/**
-CAROUSEL
-*/
- .carousel {
-    position: relative;
-    overflow : hidden;
- }
-
- .carousel__container::after {
-    content: '';
-    clear: both;
-    display: table;
- }
-
- .carousel__item {
-    float: left;
- }
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');

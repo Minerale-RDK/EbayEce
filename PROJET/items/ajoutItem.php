@@ -32,8 +32,8 @@ function rrmdir($newdir) {
         }
     }
 
-$nom = isset($_POST["Nom"])? $_POST["Nom"] : "";
-$description = isset($_POST["description"])? $_POST["description"] : "";
+$nom = addslashes(isset($_POST["Nom"])? $_POST["Nom"] : "");
+$description = addslashes(isset($_POST["description"])? $_POST["description"] : "");
 $categorie = isset($_POST["categorie"])? $_POST["categorie"] : "";
 $enchere = isset($_POST["enchere"])? $_POST["enchere"] : "";
 $meilleurof = isset($_POST["meilleurof"])? $_POST["meilleurof"] : "";
@@ -151,6 +151,7 @@ else{
 
     if(!empty($achatim) && empty($meilleurof) && empty($enchere)){
         $typevente = "1";
+        $date2 = 0;
     }
 
     if(empty($achatim) && empty($meilleurof) && !empty($enchere)){
@@ -159,6 +160,7 @@ else{
 
     if(empty($achatim) && !empty($meilleurof) && empty($enchere)){
         $typevente = "3";
+        $date2 = 0;
     }
 
     if(!empty($achatim) && empty($meilleurof) && !empty($enchere)){
@@ -167,6 +169,7 @@ else{
 
     if(!empty($achatim) && !empty($meilleurof) && empty($enchere)){
         $typevente = "5";
+        $date2 = 0;
     }
 
     if(empty($achatim) && empty($meilleurof) && empty($enchere)){
@@ -187,13 +190,13 @@ else{
     $prix1 = (int)$prix;
     $prix3 = (int)$prix2;
 
-    
+
   
     if (empty($erreur)) {
         
 
         
-       $sql = "INSERT INTO items (nomitem, description, chemindossier, typevente, prix, categorie, datefin, IDVendeur, avendre, prixench) VALUES ('$nom', '$description', '$chemindossier', '$intvente', '$prix1', '$categorie', '$date2', '$variablesessionint', '$avendre1', '$prix3')";
+       $sql = "INSERT INTO items (nomitem, description, chemindossier, typevente, prix, categorie, datefin, IDVendeur, avendre, prixench) VALUES ('$nom', '$description', '$chemindossier', $intvente, $prix1, '$categorie', $date2, $variablesessionint, $avendre1, $prix3)";
        $result = mysqli_query($db_handle, $sql);
        if (!$result){
            echo '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
