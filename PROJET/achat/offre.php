@@ -3,46 +3,24 @@
 include('../bases/header.php');
 
 ?>
-<head>
- <script type="text/javascript">
-    //http://blog.rolandl.fr/1465-bootstrap-une-fenetre-modale-a-la-suppression-des-lignes-de-vos-tableaux
-        $(document).ready(function () {
-        var theHREF;
 
-        $(".confirmModalLink").click(function(e) {
-            e.preventDefault();
-            theHREF = $(this).attr("href");
-            $("#confirmModal").modal("show");
-        });
-
-        $("#confirmModalYes").click(function(e) {
-            window.location.href = theHREF;
-        });
-    });
-
-    $(document).ready(function(){
-    $("a.submit").click(function(){
-        document.getElementById("myForm").submit();
-    }); 
-});
-    </script>
-</head> 
 <body>
+  
 
 <?php
 
+if(!isset($_SESSION['statut'])){
 
-
-include('../bases/menu.php');
-
-if(!isset($_SESSION['statut']) || $_SESSION['statut'] == "vendeur"){
-
-    header('location: ../comptes/login.php');
-    exit;
+  header('location: ../comptes/login.php');
+  exit;
 
 }
 
+include('../bases/menu.php');
+  
+            $idVisiteur = $_SESSION['id'];
             $id = $_GET['id'];
+            $IDGetAcheteur = isset($_GET["idach"])? $_GET["idach"] : "";
 
             $sql = "SELECT * FROM items WHERE IDItem = '$id'";
             $req = mysqli_query($db_handle, $sql);
@@ -55,6 +33,17 @@ if(!isset($_SESSION['statut']) || $_SESSION['statut'] == "vendeur"){
 
             $files2 = glob("$dossier/*video*"); 
             $compteur2 = count($files2);
+
+            if($_SESSION['statut'] == "acheteur"){
+              $sql2 ="SELECT * FROM meilleuroffre WHERE IDItem = '$id'";
+            }
+            else{
+              $sql2 ="SELECT * FROM meilleuroffre WHERE IDItem = '$id' AND IDAcheteur ='$IDGetAcheteur'";
+            }
+  
+            $req2 = mysqli_query($db_handle, $sql2);
+            $req3 = mysqli_query($db_handle, $sql2);
+            $data2 = mysqli_fetch_assoc($req2);           
 
 ?>
 
@@ -123,52 +112,178 @@ if(!isset($_SESSION['statut']) || $_SESSION['statut'] == "vendeur"){
                 <h2 style="margin-left:13px"> '.$data['nomitem'].' </h2>
                 <p style="text-align: justify; margin-left:14px;" ><br>
               <u>Description :</u> '.$data['description'].'
-              <br><br>';
+              <br>';
               if ($compteur2 != 0)
               {
                 $extfile2 = $files2[0];
                 echo '<a href="'.$extfile2.'">Lien vers la vidéo disponible</a><br><br>';
               }
-              echo'</p>
-              <form class="col-md-8 pull-left" action="traitementoffre.php?id='.$id.'" method="post" enctype="text/plain" id="myForm" >
-              <label for="input-group">Entrez le montant de votre offre :<br></label>
-              <div class="input-group">
-              <input type="text" name="montant" class="form-control" aria-label="Montant de l\'offre" style="float:left; margin-top:5px;" placeholder="Montant" required>
-              <div class="input-group-append">
-                <span class="input-group-text" style="float:left; margin-top:5px;">€</span>
-              </div> 
-            </div>
-            <br>
-            <button type="submit" class="confirmModalLink btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">Soumettre</button>
+                while($data3 = mysqli_fetch_assoc($req3)){
 
+                  if($idVisiteur != $data3['IDAcheteur'] && $_SESSION['statut'] == "acheteur"){ // Si jamais l'acheteur n'a pas d'offre en cours pour cet item
+                    echo'</p>
+                    <form method="post" action="traitementoffre.php?id='.$id.'">
+                    <div class="input-group col-md-6" >
+                    <input type="text" class="form-control" name="montant" aria-label="Montant" placeholder="Montant">
+                    <div class="input-group-append">
+                      <span class="input-group-text">€</span>
+                    </div>
+                    <div>
+                    <br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Soumettre votre offre
+                    </button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                      Selon nos <a href="../bases/CGV">CGV</a>, si le vendeur accepte votre offre vous êtes dans l\'obligation légale de procéder au paiement. Souhaitez-vous continuer ?
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                  </div>
+                  </form>';
 
+                  }
+                  
+                  elseif($data3['IDAcheteur'] == $idVisiteur && $data3['tour'] == "2" && $data3['accepte'] == "0" && $_SESSION['statut'] == "acheteur" && $data3['nbtry'] < "10"){
+                    echo '<br>Votre offre a été soumise, veuillez attendre que le vendeur accepte votre offre ou vous propose une contre-offre </div>
+                    </div>'; //Si une offre est en cours et que c'est le tour du vendeur
+                  }
+                  elseif($data3['IDAcheteur'] == $idVisiteur && $data3['accepte'] == "1" && $_SESSION['statut'] == "acheteur"){
+                    echo 'Votre offre a été <strong>acceptée</strong> ! Vous pouvez maintenant procéder au paiement<br><br>
+                    <a href="../items/addpanier.php?id='.$id.'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a> </div>
+                    </div>'; //Page où accède l'acheteur si jamais une de ses offres à été acceptée
+                  }
+                  elseif($data3['IDAcheteur'] == $idVisiteur && $data3['tour'] == "1" && $data3['accepte'] == "0" && $_SESSION['statut'] == "acheteur" && $data3['nbtry'] < "10"){
+                    // Si c'est le tour de l'acheteur et que le nombre d'essais n'est pas dépassé
+                    echo '<p style="margin-left : 14px">Le vendeur vous a proposé une contre-offre. Le montant de cette contre-offre est de '.$data3['prixprop'].' €.<br><u>Vous pouvez :</u> </p>
+                    <form method="post" action="traitementoffre.php?id='.$id.'"> 
+                    <div class="input-group col-md-6" >
+                    <div>
+                    <button type="submit" name="Accepter" class="btn btn-primary test">
+                    Accepter l\'offre
+                    </button>
+                    </div>
+                    <br><br><p>Ou <u>faire une contre-offre :</u></p><br>
+                    <div class="input-group ">
+                    <input type="text" class="form-control" name="montant" aria-label="Contre-offre" placeholder="Montant">
+                    <div class="input-group-append">
+                    <span class="input-group-text">€</span>
+                    </div>
+                    <div>
+                    <br><button type="submit" name="CO" class="btn btn-primary">
+                    Soumettre votre offre
+                    </button>
+                    </div>
+                    </div>
+                    </form>';
+
+                  }
+                  elseif ($data3['IDAcheteur'] == $idVisiteur && $data3['tour'] == "1" && $data3['accepte'] == "0" && $_SESSION['statut'] == "acheteur" && $data3['nbtry'] == "10") {
+                    //Si c'est le tour de l'acheteur et que c'est sa dernière chance (message pour lui dire)
+                    echo '<p style="margin-left : 14px">Le vendeur vous a proposé une contre-offre. Le montant de cette contre-offre est de '.$data3['prixprop'].' €.
+                    <br><u>Vous pouvez :</u> </p>
+                    <form method="post" action="traitementoffre.php?id='.$id.'">
+                    <div class="input-group col-md-12" >
+                    <div>
+                    <button type="submit" name="Accepter" class="btn btn-primary test">
+                    Accepter l\'offre
+                    </button>
+                    </div>
+                    <br><br><p>Ou <u>Refuser :</u> Si vous refusez, les négociations s\'arrêtent et vous ne pourrez plus négocier pour cet article.</p><br>
+                    <br><button type="submit" name="refuser" class="btn btn-danger">
+                    Refuser
+                    </button>
+                    </form>';
+                  }
+                  elseif ($data3['IDAcheteur'] == $idVisiteur && $data3['accepte'] == "0" && $_SESSION['statut'] == "acheteur" && $data3['nbtry'] == "11"){
+                    // Si l'acheteur tente de refaire une offre pour un article alors qu'il a déjà dépassé le quota de négociations
+                      echo '<br>Vous ne pouvez plus négocier pour cet article, vous avez atteint le nombre maximum d\'offre/contre-offre.';
+                  }
+                  
+                  //On passe maintenant à la gestion des offres pour le vendeur. Grâce au Get de l'id de l'acheteur, on accède à l'offre concernée uniquement 
+                  //(accès uniquemetn possible via moncompte.php)
+
+                  elseif($data3['IDVendeur'] == $idVisiteur && $data3['tour'] == "1" && $data3['accepte'] == "0" && $_SESSION['statut'] == "vendeur"){
+                    //Si c'est le tour de l'acheteur 
+                    echo '<br>Votre offre a été soumise , veuillez attendre que l\'acheteur accepte votre offre ou vous propose une contre-offre.';
+                  }
+
+                  elseif($data3['IDVendeur'] == $idVisiteur && $data3['tour'] == "2" && $data3['accepte'] == "0" && $_SESSION['statut'] == "vendeur"){
+                    //Si c'est le tour du vendeur et qu'on est pas dans la dernière négociation possible
+                    echo '<p style="margin-left : 14px">L\'acheteur vous a proposé une contre-offre. Le montant de cette contre-offre est de '.$data3['prixprop'].' €.<br><u>Vous pouvez :</u> </p>
+                    <form method="post" action="traitementoffre.php?idach='.$IDGetAcheteur.'&id='.$id.'">
+                    <div class="input-group col-md-6" >
+                    <div>
+                    <button type="submit" name="Accepter" class="btn btn-primary test">
+                    Accepter l\'offre
+                    </button>
+                    </div>
+                    <br><br><p>Ou <u>faire une contre-offre :</u></p><br>
+                    <div class="input-group ">
+                    <input type="text" class="form-control" name="montant" aria-label="Contre-offre" placeholder="Montant">
+                    <div class="input-group-append">
+                    <span class="input-group-text">€</span>
+                    </div>
+                    <div>
+                    <br><button type="submit" name="CO" class="btn btn-primary">
+                    Soumettre votre offre
+                    </button>
+                    </div>
+                    </div>
+                    </form>';
+                  }
+                  elseif($data3['IDVendeur'] == $idVisiteur && $data3['tour'] == "2" && $data3['accepte'] == "0" && $_SESSION['statut'] == "vendeur" && $data3['nbtry'] == "9"){
+                    //si c'est la dernière offre que le vendeur peut faire
+                    echo '<p style="margin-left : 14px">L\'acheteur vous a proposé une contre-offre. Le montant de cette contre-offre est de '.$data3['prixprop'].' €.<br><u>Vous pouvez :</u> </p>
+                    <form method="post" action="traitementoffre.php?idach='.$IDGetAcheteur.'&id='.$id.'">
+                    <div class="input-group col-md-6" >
+                    <div>
+                    <button type="submit" name="Accepter" class="btn btn-primary test">
+                    Accepter l\'offre
+                    </button>
+                    </div>
+                    <br><br><p>Ou <u>faire une contre-offre :</u> Attention, dernière offre possible. Si l\'acheteur refuse, les négociations seront closes.</p><br>
+                    <div class="input-group ">
+                    <input type="text" class="form-control" name="montant" aria-label="Contre-offre" placeholder="Montant">
+                    <div class="input-group-append">
+                    <span class="input-group-text">€</span>
+                    </div>
+                    <div>
+                    <br><button type="submit" name="CO" class="btn btn-primary">
+                    Soumettre votre offre
+                    </button>
+                    </div>
+                    </div>
+                    </form>';
+
+                  }              
+                }
+              
+              
+
+echo'
               </div>
-            </div>';
-            ?>
+            </div>';?>
+            
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Soumission de l'offre</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Êtes-vous sûr de vouloir enregistrer votre offre ? Selon nos <a href="../compte/CGV.html">CGV</a>, l'acceptation de la part du vendeur entraîne une obligation d'achat. 
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-secondary" data-dismiss="modal" >Annuler</a>
-        
-        <a href="#" type="submit" class="submit btn btn-primary" id="confirmModalYes" >Soumettre</a>'; 
-      </div>
-    </div>
-  </div>
-</div>
-</form>
     
     <br><br>
+
+
+    
 
 <?php
 

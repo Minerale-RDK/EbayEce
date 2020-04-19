@@ -148,7 +148,7 @@ include('../bases/header.php');
                   </p>';
                 }
 
-                elseif($_SESSION['statut'] == "" || $_SESSION['statut'] == "vendeur"){
+                elseif($_SESSION['statut'] == "" ){
                   echo '<a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
                   </p>';
                 }
@@ -158,6 +158,16 @@ include('../bases/header.php');
                   class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
                   <i class="fa fa-trash" aria-hidden="true" ></i></a>
                   ';
+                }
+                elseif($_SESSION['statut'] == "vendeur" && $_SESSION['id'] == $data['IDVendeur']){
+                  echo '<a href="destruction.php?id='.$id.'" 
+                  class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
+                  <i class="fa fa-trash" aria-hidden="true" ></i></a>
+                  ';
+                }
+                elseif($_SESSION['statut'] == "vendeur" && $_SESSION['id'] != $data['IDVendeur']){
+                  echo '<a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
+                  </p>';
                 }
 
                 
@@ -175,7 +185,7 @@ include('../bases/header.php');
                 
                 }
 
-                elseif($_SESSION['statut'] == "" || $_SESSION['statut'] == "vendeur"){
+                elseif($_SESSION['statut'] == ""){
                   echo '
                 <a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Enchèrir</a><br><br>
                 ';
@@ -185,6 +195,15 @@ include('../bases/header.php');
                   class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
                   <i class="fa fa-trash" aria-hidden="true" ></i></a><br><br>
                   ';
+                } elseif($_SESSION['statut'] == "vendeur" && $_SESSION['id'] == $data['IDVendeur']){
+                  echo '<a href="destruction.php?id='.$id.'" 
+                  class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
+                  <i class="fa fa-trash" aria-hidden="true" ></i></a><br><br>
+                  ';
+                }
+                elseif($_SESSION['statut'] == "vendeur" && $_SESSION['id'] != $data['IDVendeur']){
+                  echo '<a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Enchérir</a>
+                  </p><br>';
                 }
 
                 echo 'Il reste ';
@@ -198,7 +217,7 @@ include('../bases/header.php');
                   echo '<a href="../achat/offre.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Faire une offre</a><br><br>
                   ';
                  }
-                 elseif($_SESSION['statut'] == "" || $_SESSION['statut'] == "vendeur")
+                 elseif($_SESSION['statut'] == "")
                  {
                   echo '<a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Faire une offre</a><br><br>
                   '; }
@@ -207,7 +226,19 @@ include('../bases/header.php');
                     class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
                     <i class="fa fa-trash" aria-hidden="true" ></i></a>
                     </p>';
-                  }  
+                  }
+                  elseif($_SESSION['statut'] == "vendeur" && $_SESSION['id'] == $data['IDVendeur']){
+                    echo 'Merci de passer par votre page <a href="../comptes/moncompte.php">mon compte</a> pour gérer vos négociations <br><br>
+                    <a href="destruction.php?id='.$id.'" 
+                  class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
+                  <i class="fa fa-trash" aria-hidden="true" ></i></a>
+                  </p>';
+                  }
+                  elseif($_SESSION['statut'] == "vendeur" && $_SESSION['id'] != $data['IDVendeur']){
+                    echo '<a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Faire une offre</a><br><br>
+                  ';
+                  }
+
               }
               elseif($data['typevente'] == "4"){
                 echo '<u>Méthodes d\'achat </u>: Achat immédiat ou enchère <br><br>
@@ -217,7 +248,7 @@ include('../bases/header.php');
                     ';
                 }
 
-                elseif($_SESSION['statut'] == "" || $_SESSION['statut'] == "vendeur"){
+                elseif($_SESSION['statut'] == ""){
                   echo '<a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Enchèrir</a><br><br>
                     ';
                    }
@@ -225,7 +256,14 @@ include('../bases/header.php');
                     echo '<a href="destruction.php?id='.$id.'" 
                     class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
                     <i class="fa fa-trash" aria-hidden="true" ></i></a>
-                    </p>';
+                    </p><br><br>';
+                  }
+                  elseif($_SESSION['statut'] == "vendeur" && $_SESSION['id'] == $data['IDVendeur']){
+                    echo '<br><br>';
+                  }
+                  elseif($_SESSION['statut'] == "vendeur" && $_SESSION['id'] != $data['IDVendeur']){
+                    echo '<a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Enchèrir</a><br><br>
+                    ';
                   }
                    echo 'Il reste ';
                    echo $interval->format('%m mois %d jours %H heures et %i minutes pour enchérir'); echo '</p>';
@@ -237,7 +275,19 @@ include('../bases/header.php');
                   <a href="panier.html?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
                   </p>';
                 }
-                elseif($_SESSION['statut'] == "" || $_SESSION['statut'] == "vendeur"){
+                elseif($_SESSION['statut'] == ""){
+                  echo'
+                  <a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
+                  </p>';
+                }
+                elseif($_SESSION['statut'] == "vendeur" && $_SESSION['id'] == $data['IDVendeur']){
+                  echo '<br><br><a href="destruction.php?id='.$id.'" 
+                    class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
+                    <i class="fa fa-trash" aria-hidden="true" ></i></a>
+                    </p>';
+
+                }
+                elseif($_SESSION['statut'] == "vendeur" && $_SESSION['id'] != $data['IDVendeur']){
                   echo'
                   <a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
                   </p>';
@@ -256,7 +306,7 @@ include('../bases/header.php');
                   echo '<a href="panier.html?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
                   </p> <br><a href="../achat/offre.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Faire une offre</a><br><br>';
                 }
-                elseif($_SESSION['statut'] == "" || $_SESSION['statut'] == "vendeur"){
+                elseif($_SESSION['statut'] == "" ){
                   echo '<a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
                   </p><br><a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Faire une offre</a><br><br>';
                 }
@@ -265,6 +315,18 @@ include('../bases/header.php');
                   class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
                   <i class="fa fa-trash" aria-hidden="true" ></i></a>
                   </p>';
+                }
+                elseif($_SESSION['statut'] == "vendeur" && $_SESSION['id'] == $data['IDVendeur']){
+                  echo 'Merci de passer par votre page <a href="../comptes/moncompte.php">mon compte</a> pour gérer vos négociations<br><br>
+                  <a href="destruction.php?id='.$id.'" 
+                  class="confirmModalLink btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Supprimer des ventes&ensp;
+                  <i class="fa fa-trash" aria-hidden="true" ></i></a>
+                  </p>';
+                }
+                elseif($_SESSION['statut'] == "vendeur" && $_SESSION['id'] != $data['IDVendeur']){
+                  echo '<a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
+                  </p><a href="../comptes/login.php"  class="btn btn-outline-info" role="button" >Faire une offre</a><br><br>
+                ';
                 }
               }
   
