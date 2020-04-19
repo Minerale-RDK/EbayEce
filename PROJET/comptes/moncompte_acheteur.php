@@ -100,15 +100,15 @@
         $id_item = array();
 
         while ($data = mysqli_fetch_assoc($result)) {
-            array_push($id_item, array($data['IDItem'], $data['tour']));
+            array_push($id_item, array($data['IDItem'], $data['tour'], $data['prixprop']));
         }
         $id_verif = array();
-        foreach($id_item as list($a, $b)){
+        foreach($id_item as list($a, $b, $prix)){
             $sql = "SELECT * FROM items WHERE IDItem = $a AND avendre = 1";
             $result = mysqli_query($db_handle, $sql);
             if(mysqli_num_rows($result) != 0){
 
-                array_push($id_verif, array($a, $b));
+                array_push($id_verif, array($a, $b, $prix));
         
             }
         }
@@ -119,19 +119,20 @@
         }else{
             $nbr = sizeof($id_verif);
         echo '<h1 style="margin-left: 15px;">'.$titre.' ('.sizeof($id_verif) .')</h1><br>';
-        foreach($id_verif as list($a, $b)){
+        $nbr = sizeof($id_verif);
+        foreach($id_verif as list($a, $b, $prix)){
             $result = mysqli_query($db_handle, $sql);
             $data = mysqli_fetch_assoc($result);
 
             if ($i%4 == 0){
 
                 echo '<div class="card-deck">';
-                item($data, $vendu, $b);
+                item($data, $vendu, $b, "", 0,$prix);
                         
             }
             else{
                 
-                item($data, $vendu, $b);
+                item($data, $vendu, $b ,"", 0,$prix);
 
             }
             $i++;

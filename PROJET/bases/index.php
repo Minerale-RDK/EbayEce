@@ -3,19 +3,21 @@
   include('header.php');
   
 ?>
+
 <body>
-   
-        <?php 
-            include ('menu.php');
-        ?>
-       
-       <br><br>
-       <div class="wrapper">
+
+<?php 
+    include ("menu.php");
+?>
+
+<br>
+    
+<div class="col-container">
     
     <div class="row" >
-        <div style="margin-left: 40px" class="col" >
+        <div style="margin-left: 40px ; " class="col">
         
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="  top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -23,13 +25,13 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="d-block w-100" src="../images/1.jpg" alt="First slide">
+            <img class="d-block w-100" src="../images/1.png" alt="First slide">
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="../images/2.jpg" alt="Second slide">
+            <img class="d-block w-100" src="../images/2.png" alt="Second slide">
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="../images/3.jpg" alt="Third slide">
+            <img class="d-block w-100" src="../images/3.png" alt="Third slide">
           </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -41,31 +43,53 @@
           <span class="sr-only">Next</span>
         </a>
     </div>
+            </div>
             <br><br><br><br><br><br><br><br>
-        </div>
+       
+   
     
+    <div style="margin-left: auto; margin-right: 40px ; " class="col" >
     
+        
+       
     
-    <div style="margin-left: auto; margin-right: 40px" class="col" >
-    
-    <br>
-        <h5 style="text-align: center">Bienvenue dans notre vente aux enchères en lignes</h5><br><br>
-        <h6>Comment ca fonctionne ? </h6><br><br>
-        <p>Ici, vous pouvez découvrir vos articles ainsi que les achetez de plusieurs facons differentes, voici comment :
+        <h2 style="text-align: center; margin-top: 10%">Ebay ECE</h2>
+        <h2 style="text-align: center; margin-top: 10px">Achetez et vendez des articles de qualité </h2>
+        <br><br>
+        <h5 style="margin-top: 20px">Comment ca fonctionne?</h5>
+        <p>
+         Voici comment trouver les articles qui vous intéressent :
         </p>
-        <ul>
-                <li>Choisissez votre faccon d'acheter: </li>
-            <li>Choisissez la catégorie</li>
-            
-            </ul>
-    
-    </div>        
+        
+          <h6 >En filtrant par catégorie</h6>
+        <p style=" text-align: justify ;text-justify: inter-word" > Si vous cherchez un bijoux, une montre ou n'importe quel accessoire porté, il vous suffit d'aller dans l'onglet "Accessoires VIP".
+        <br> Si vous cherchez une œuvre d'art vous pouvez vous rendre dans la catégorie "Bons pour le Musée".
+        <br>En cliquant sur la catégorie "Ferraille ou Trésors" vous trouverez des antiquités comme d'anciennes pièces de monnaie et autres. </p>
+       
+        <h6 >En filtrant par type d'achat</h6>
+        <p style=" text-align: justify ;text-justify: inter-word">Vous pouvez aussi choisir de ne voir que les articles qui sont soit dans les ventes aux enchères, en achat immédiat, ou ceux dont les prix sont négociables en "meilleures offres". </p>
+
+        
+        
 
 </div>
-    <br><br>
-    <?php
-   include('footer.php');
-   ?>
+        
+   
+    </div>
+        
+ </div>
+    
+    
+    </body>
+    
+    
 
-</body>
+<?php
+   include('footer.php');
+?>
+
+
+
 </html>
+
+

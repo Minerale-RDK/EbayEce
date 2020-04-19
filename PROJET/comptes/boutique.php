@@ -1,6 +1,6 @@
 <?php
 
-function item($data, $vendu, $meilleureoffre=0 ,$login="", $id_ach=0){
+function item($data, $vendu, $meilleureoffre=0 ,$login="", $id_ach=0 ,$prix=0){
 
     $dossier = $data['chemindossier'];
     $files = glob("$dossier/*photo*"); 
@@ -41,17 +41,18 @@ function item($data, $vendu, $meilleureoffre=0 ,$login="", $id_ach=0){
             </a>
             </div>
             <div class="card-body">
-            <h5 class="card-title">'.$data['nomitem'].'</h5>
-            <p class="card-text">Description : '.$data['description'].'</p>
-            </div>
-            <div class="card-footer">
-            <small class="text-muted">';
+            <h5 class="card-title">'.$data['nomitem'].'</h5>';
         if($meilleureoffre == 1 || $meilleureoffre == 2){
-            echo'Meilleure offre en cours : le vendeur ';
             if($meilleureoffre == 2){
-                echo 'est entrain d\'étudier votre offre';
+                echo '<p class="card-text">Votre dernière offre : '.$prix.' €</p>
+                </div>
+                <div class="card-footer">
+                <small class="text-muted">Meilleure offre en cours : le vendeur est entrain d\'étudier votre offre';
             }elseif($meilleureoffre == 1){
-                echo 'vous a envoyé une contre offre';
+                echo ' <p class="card-text">Dernière offre du vendeur : '.$prix.' €</p>
+                </div>
+                <div class="card-footer">
+                <small class="text-muted">Meilleure offre en cours : le vendeur vous a envoyé une contre offre';
             }
         }elseif($meilleureoffre == 3){
             echo'Le vendeur a accepté votre offre. Vous pouvez l\'ajouté à votre panier.';
@@ -65,15 +66,17 @@ function item($data, $vendu, $meilleureoffre=0 ,$login="", $id_ach=0){
             </a>
             </div>
             <div class="card-body">
-            <h5 class="card-title">'.$data['nomitem'].'</h5>
-            <p class="card-text">Meilleure offre en cours : '.$login.'</p>
-            </div>
-            <div class="card-footer">
-            <small class="text-muted">'.$login;
+            <h5 class="card-title">'.$data['nomitem'].'</h5>';
             if($meilleureoffre == 2){
-                echo ' vous a envoyé une offre';
+                echo '<p class="card-text">Dernière offre de l\'acheteur : '.$prix.' €</p>
+                </div>
+                <div class="card-footer">
+                <small class="text-muted">'.$login.' vous a envoyé une offre';
             }elseif($meilleureoffre == 1){
-                echo ' est entrain d\'étudier votre offre';
+                echo '<p class="card-text">Votree dernière offre : '.$prix.' €</p>
+                </div>
+                <div class="card-footer">
+                <small class="text-muted">'.$login.' est entrain d\'étudier votre offre';
             }
         }elseif($meilleureoffre == 3){
             echo'<img src="'.$extfile.'" style="width:100%;" class="img-thumbnail" >
