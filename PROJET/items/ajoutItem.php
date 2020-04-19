@@ -33,7 +33,7 @@ function rrmdir($newdir) {
     }
 
 $nom = isset($_POST["Nom"])? $_POST["Nom"] : "";
-$description = isset($_POST["Description"])? $_POST["Description"] : "";
+$description = isset($_POST["description"])? $_POST["description"] : "";
 $categorie = isset($_POST["categorie"])? $_POST["categorie"] : "";
 $enchere = isset($_POST["enchere"])? $_POST["enchere"] : "";
 $meilleurof = isset($_POST["meilleurof"])? $_POST["meilleurof"] : "";

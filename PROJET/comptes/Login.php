@@ -3,7 +3,7 @@
 ?>
 <body>
         <?php 
-            if($_GET['erreur']==1){
+            if(isset($_GET['erreur']) && $_GET['erreur']==1){
                 echo '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
              &ensp;Identifiant ou mot de passe invalide.</div>';
               }

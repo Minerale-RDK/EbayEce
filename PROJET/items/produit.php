@@ -24,6 +24,11 @@ include('../bases/header.php');
 
         <?php 
 
+if(isset($_GET['valid']) && $_GET['valid']==1){
+  echo '<div class="alert alert-success" role="alert"><i class="fa fa-check" aria-hidden="true"></i>
+&ensp;Votre produit est maintenant en vente !</div>';
+}
+
 
 
             $dateajd = time();
@@ -144,7 +149,7 @@ include('../bases/header.php');
                 Prix : '.$data['prix'].' € <br><br>';
 
                 if($_SESSION['statut'] == "acheteur"){
-                  echo '<a href="panier.html?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
+                  echo '<a href="addpanier.html?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
                   </p>';
                 }
 
@@ -272,7 +277,7 @@ include('../bases/header.php');
                 <u>Prix pour achat immédiat</u>: '.$data['prix'].' € &nbsp';
                 if($_SESSION['statut'] == "acheteur"){
                   echo'
-                  <a href="panier.html?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
+                  <a href="addpanier.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
                   </p>';
                 }
                 elseif($_SESSION['statut'] == ""){
@@ -303,7 +308,7 @@ include('../bases/header.php');
                 echo '<u>Méthodes d\'achat </u>: Achat immédiat ou meilleur offre <br><br>
                 <u>Prix pour achat immédiat</u>: '.$data['prix'].' € &nbsp <br><br>';
                 if($_SESSION['statut'] == "acheteur"){
-                  echo '<a href="panier.html?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
+                  echo '<a href="addpanier.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Ajouter au panier</a>
                   </p> <br><a href="../achat/offre.php?id='.$data['IDItem'].'"  class="btn btn-outline-info" role="button" >Faire une offre</a><br><br>';
                 }
                 elseif($_SESSION['statut'] == "" ){
@@ -330,7 +335,7 @@ include('../bases/header.php');
                 }
               }
   
-            echo'</div>
+            echo'<a href="../comptes/vendeur_compte.php?id='.$data['IDVendeur'].'"> Visiter le compte du vendeur</a></div>
             </div>';   
 
         }

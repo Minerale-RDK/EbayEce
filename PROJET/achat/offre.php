@@ -118,7 +118,49 @@ include('../bases/menu.php');
                 $extfile2 = $files2[0];
                 echo '<a href="'.$extfile2.'">Lien vers la vidéo disponible</a><br><br>';
               }
+              if(!mysqli_num_rows ( $req3 )){
+                echo'</p>
+                    <form method="post" action="traitementoffre.php?id='.$id.'">
+                    <div class="input-group col-md-6" >
+                    <input type="text" class="form-control" name="montant" aria-label="Montant" placeholder="Montant">
+                    <div class="input-group-append">
+                      <span class="input-group-text">€</span>
+                    </div>
+                    <div>
+                    <br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Soumettre votre offre
+                    </button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                      Selon nos <a href="../bases/CGV">CGV</a>, si le vendeur accepte votre offre vous êtes dans l\'obligation légale de procéder au paiement. Souhaitez-vous continuer ?
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                  </div>
+                  </form>';
+
+              }
+              else{
                 while($data3 = mysqli_fetch_assoc($req3)){
+
+                  if(empty($data3)){
+                    
+
+                  }
 
                   if($idVisiteur != $data3['IDAcheteur'] && $_SESSION['statut'] == "acheteur"){ // Si jamais l'acheteur n'a pas d'offre en cours pour cet item
                     echo'</p>
@@ -156,6 +198,7 @@ include('../bases/menu.php');
                   </form>';
 
                   }
+                  
                   
                   elseif($data3['IDAcheteur'] == $idVisiteur && $data3['tour'] == "2" && $data3['accepte'] == "0" && $_SESSION['statut'] == "acheteur" && $data3['nbtry'] < "10"){
                     echo '<br>Votre offre a été soumise, veuillez attendre que le vendeur accepte votre offre ou vous propose une contre-offre </div>
@@ -271,6 +314,7 @@ include('../bases/menu.php');
 
                   }              
                 }
+              }
               
               
 

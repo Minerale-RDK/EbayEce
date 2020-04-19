@@ -76,7 +76,7 @@ else{
               </div>
 
               <div class="form-label-group">
-                <input type="text" id="Description" class="form-control" placeholder="Description" required style="margin-top: 30px; height: 150px;" name="Description" >
+                <input type="text" id="Description" class="form-control" placeholder="Description" required style="margin-top: 30px; height: 150px;" name="description" >
                 <label for="Description"></label>
               </div>
               

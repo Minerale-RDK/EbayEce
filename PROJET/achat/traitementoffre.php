@@ -8,7 +8,7 @@ if(!isset($_SESSION)){
 
 echo '<body>';
 
-$montant2 = isset($_POST["montant"]) ? $_POST["montant"] : "bite";
+$montant2 = isset($_POST["montant"]) ? $_POST["montant"] : "";
 
 $montant = (int)$montant2;
 
@@ -16,7 +16,7 @@ $idItem = isset($_GET['id'])? $_GET['id'] : "";
 $idCustomer = isset($_GET['idach'])? $_GET['idach'] : "";
 
 
-if($montant == "" || !is_numeric($montant2))
+if($montant2 == "" || !is_numeric($montant))
 {
     echo '<div class="alert alert-danger" role="alert">Erreur : Merci de rentrer un montant valide.</div>';
     include('offre.php');
@@ -57,8 +57,11 @@ else{
 
 
             if(empty($dataRechercheOffre)){
-                $insertNewOffre = "INSERT INTO meilleuroffre (nbtry, prixprop, IDAcheteur, IDItem, IDVendeur, tour) 
-                VALUES ('1', '$montant', '$_SESSION['id']', '$idItem', '$idVendeur', '2')";
+
+                echo "'.$montant.' montant '.$idAcheteur.' id acheteur '.$idItem.' id item '.$idVendeur.' id vendeur" ;
+
+                
+                $insertNewOffre = "INSERT INTO meilleuroffre (nbtry, prixprop, IDAcheteur, IDItem, IDVendeur, tour) VALUES ('1', '$montant', '$idAcheteur, '$idItem', '$idVendeur', 2)";
                 $resultInsertNew = mysqli_query($db_handle, $insertNewOffre);
 
                 if(!$resultInsertNew){
@@ -124,6 +127,7 @@ else{
                     echo '<div class="alert alert-success" role="alert">Votre offre a bien été transmise au vendeur.</div>';
                     include('../bases/index.php');
                     exit;
+                }
                 }
             elseif(isset($_POST['refuser'])){
                 $nbTry2 = $dataOffre['nbtry'];
@@ -230,7 +234,7 @@ else{
 
     }
 
-}
+
 
 
 

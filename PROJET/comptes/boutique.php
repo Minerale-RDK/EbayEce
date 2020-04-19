@@ -36,7 +36,7 @@ function item($data, $vendu, $meilleureoffre=0 ,$login="", $id_ach=0){
 
     }elseif($vendu == 2){
 
-        echo '<a href="../items/offre.php?id='.$data['IDItem'].'">
+        echo '<a href="../achat/offre.php?id='.$data['IDItem'].'">
             <img src="'.$extfile.'" style="width:100%;" class="img-thumbnail" >
             </a>
             </div>
@@ -60,7 +60,7 @@ function item($data, $vendu, $meilleureoffre=0 ,$login="", $id_ach=0){
 
     }elseif($vendu == 3){
         if($meilleureoffre == 1 || $meilleureoffre == 2){
-        echo '<a href="../items/offre.php?id='.$data['IDItem'].'&idach='.$id_ach.'">
+        echo '<a href="../achat/offre.php?id='.$data['IDItem'].'&idach='.$id_ach.'">
             <img src="'.$extfile.'" style="width:100%;" class="img-thumbnail" >
             </a>
             </div>
