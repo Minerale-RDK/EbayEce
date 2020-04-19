@@ -100,8 +100,7 @@
     echo '<br><br>';
     maboutique($titre_historique, $msg_erreurh, $result2, $vendu);
 
-?>
-
-<?php 
     include ("../bases/footer.php");
 ?>
+
+</body>

@@ -29,17 +29,36 @@
 <body>
    
         <?php 
-            include ("../bases/menu.php");
             $id = $_GET['id'];
+            if($id == $_SESSION['id'] && $_SESSION['statut']=="vendeur"){
+              echo '<script language="Javascript"> document.location.replace("moncompte_vendeur.php"); </script>';
+              exit;
+            }
             include ("../bases/bdd.php");
+            include ("../bases/menu_comptevendeur.php");
             $sql = "SELECT * FROM vendeurs WHERE IDVendeur = '$id'";
             $result = mysqli_query($db_handle, $sql);
             $data = mysqli_fetch_assoc($result);
             $sql2 = "SELECT * FROM items WHERE IDVendeur = $id AND avendre = 0";
             $result2 = mysqli_query($db_handle, $sql2);
+            echo '<div style="background-image: url('.$data['cover_url'].') ; background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;">
+                  <a href="../bases/index.php"><img src="../images/logo.png" class="logo-accueil"></a>
+                 
+                  
+                      <img style="position: absolute;
+              top: 15%;
+              left: 5%;
+              width: 200px;
+            height: 200px;
+            border-radius: 70%;" src="'.$data['file_url'].'" class="over-img"/>
+                  
+              </div>';
+            
         ?>
     
-        <br><h1 style="text-align: center">Bienvenue sur le compte vendeur de <?= $data['login']?></h1><br>
+        <br><h1 style="text-align: center">Bienvenue sur le compte vendeur de <?=$data['login']?></h1><br>
         <?php
 
             if($_SESSION['statut'] == 'administrateur'){
@@ -53,14 +72,7 @@
         ?>
         <br>
         <h4 style="text-align: center">Nombre de ventes réalisées : <?= mysqli_num_rows($result2)?></h4><br>
-        <td style="vertical-align:middle;text-align:center;">
-        <div style="position:relative;">
-    
-            <img src="../<?=$data['cover_url']?>" id="cover" class="img-thumbnail" alt="cover.jpg">
-            <img src="../<?=$data['file_url']?>" id="avatar" class="img-thumbnail" alt="avatar.jpg">
-        
-        </div>
-        </td><br>
+        <br>
     <div class="objets">
         <?php
 

@@ -53,7 +53,7 @@ if ($db_found)
             $req = mysqli_query($db_handle, $sql);
             $data = mysqli_fetch_assoc($req);
             $_SESSION['id'] = $data['IDAcheteur'];
-            echo '<script language="Javascript"> document.location.replace("../bases/index.php"); </script>';
+            echo '<script language="Javascript"> document.location.replace("../comptes/moncompte_acheteur.php"); </script>';
             exit;
         }
     }

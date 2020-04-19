@@ -18,7 +18,7 @@
         else{
             echo '<a class="navbar-brand">Bonjour</a>';
         }           
-     
+       
         if (isset($_SESSION['statut']) && $_SESSION['statut'] == "acheteur")
         {
             echo '<a class="navbar-brand" href="../comptes/login.php">Vendre&ensp;<i class="fa fa-money" aria-hidden="true"></i></a>
@@ -50,53 +50,69 @@
             </button>
             <div class="collapse navbar-collapse" id="main-navigation">';
         }
-        
-        if (isset($_SESSION['statut']) && $_SESSION['statut'] == "acheteur")
-        {
-            echo'<ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="../comptes/moncompte_acheteur.php">
-                Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
-            <li class="nav-item"><a class="nav-link">|</a></li>
-            <li class="nav-item"><a class="nav-link" href="../items/panier.php">
-                Panier&ensp; <i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                <li class="nav-item"><a class="nav-link">|</a></li>
-            <li class="nav-item"><a class="nav-link" href="../comptes/deco.php">
-                Déconnexion&ensp; <i class=" fa fa-power-off" aria-hidden="true"></i></a></li>
+       
+                if (isset($_SESSION['statut']) && $_SESSION['statut'] == "acheteur")
+                {
+                   echo'<ul class="navbar-nav">
+                   <li class="nav-item"><a class="nav-link" href="../comptes/moncompte_acheteur.php">
+                       Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
+                   <li class="nav-item"><a class="nav-link">|</a></li>
+                   <li class="nav-item"><a class="nav-link" href="../items/panier.php">
+                       Panier&ensp; <i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
+                       <li class="nav-item"><a class="nav-link">|</a></li>
+                   <li class="nav-item"><a class="nav-link" href="../comptes/deco.php">
+                       Déconnexion&ensp; <i class=" fa fa-power-off" aria-hidden="true"></i></a></li>
 
-        </ul>';
-        }
-        elseif(isset($_SESSION['statut']) && $_SESSION['statut'] == "administrateur"){
-            echo '<ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="../comptes/moncompte_admin.php">
-                Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
-                <li class="nav-item"><a class="nav-link">|</a></li>
-            <li class="nav-item"><a class="nav-link" href="../comptes/deco.php">
-                Déconnexion&ensp; <i class=" fa fa-power-off" aria-hidden="true"></i></a></li>
-        </ul> ';
-        }
-        elseif (isset($_SESSION['statut']) && $_SESSION['statut'] == "vendeur")
-        {
-            echo'<ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="../comptes/moncompte_vendeur.php">
-                Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
-                <li class="nav-item"><a class="nav-link">|</a></li>
-            <li class="nav-item"><a class="nav-link" href="../comptes/deco.php">
-                Déconnexion&ensp; <i class=" fa fa-power-off" aria-hidden="true"></i></a></li>
-            
-        </ul>';
-        }
-        else{
-            echo '<ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="../comptes/login.php">
-                Se Connecter&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
-        </ul> ';
-        }
-        ?>
-                 
-    </nav>
-    <div>
-        <a href="../bases/index.php"><img src="../images/logo.png" class="logo-accueil"></a>
-    </div>
+               </ul></nav>';
+                }
+                elseif(isset($_SESSION['statut']) && $_SESSION['statut'] == "administrateur"){
+                    echo '<ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="../comptes/adminPage.php">
+                        Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
+                        <li class="nav-item"><a class="nav-link">|</a></li>
+                   <li class="nav-item"><a class="nav-link" href="../comptes/deco.php">
+                       Déconnexion&ensp; <i class=" fa fa-power-off" aria-hidden="true"></i></a></li>
+                    <li class="nav-item"><a class="nav-link">|</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../comptes/adminPage.php">Admin</a></li>
+                </ul> </nav>';
+                }
+                elseif (isset($_SESSION['statut']) && $_SESSION['statut'] == "vendeur")
+                {
+                   echo'<ul class="navbar-nav">
+                   <li class="nav-item"><a class="nav-link" href="../comptes/moncompte_vendeur.php">
+                       Votre Compte&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
+                       <li class="nav-item"><a class="nav-link">|</a></li>
+                   <li class="nav-item"><a class="nav-link" href="../comptes/deco.php">
+                       Déconnexion&ensp; <i class=" fa fa-power-off" aria-hidden="true"></i></a></li>
+                   
+               </ul></nav>
+               <div style="background-image: url('.$_SESSION['fond'].') ; background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;">
+                        <a href="../bases/index.php"><img src="../images/logo.png" class="logo-accueil"></a>
+                    
+                        
+                            <img style="position: absolute;
+                    top: 15%;
+                    left: 5%;
+                    width: 200px;
+                height: 200px;
+                border-radius: 70%;" src="'.$_SESSION['avatar'].'" class="over-img"/></div>';
+                }
+                else{
+                    echo '<ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="../comptes/login.php">
+                        Se Connecter&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
+                    <li class="nav-item"><a class="nav-link">|</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../comptes/admin.php">Admin</a></li>
+                </ul></nav> ';
+                }
+                
+                
+                
+    
+    
+    ?>
     <nav class="navbar navbar-expand-md navbar-light">
         <div class="navbar-second">
             <hr>
