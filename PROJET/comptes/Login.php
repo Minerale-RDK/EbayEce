@@ -1,10 +1,12 @@
 <?php
     include ("../bases/header.php");
 ?>
-
-
 <body>
         <?php 
+            if($_GET['erreur']==1){
+                echo '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+             &ensp;Identifiant ou mot de passe invalide.</div>';
+              }
             include ("../bases/menu.php");
         ?>
     <div class="container"> 
@@ -20,13 +22,13 @@
                        
              <div class="form-label-group">
                  <label for="identifiant">Identifiant:</label>
-                <input type="text" class="form-control" name="identifiant" id="identifiant" aria-describedby="nameHelp" placeholder="Identifiant">
+                <input type="text" class="form-control" name="identifiant" id="identifiant" aria-describedby="nameHelp" placeholder="Identifiant" required autofocus>
                 <br>
               </div>
             
             <div class="form-label-group">
                 <label for="mdp">Mot de passe :</label>
-                <input type="text" class="form-control" name="mdp" id="mdp" aria-describedby="nameHelp" placeholder="Mot de passe"><br>
+                <input type="password" class="form-control" name="mdp" id="mdp" aria-describedby="nameHelp" placeholder="Mot de passe" required autofocus><br>
               </div>
                
                     <input type="submit" id="bttnconnex" value="Connexion" class="btn btn-lg btn-primary btn-block ">

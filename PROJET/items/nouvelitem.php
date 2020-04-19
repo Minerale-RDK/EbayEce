@@ -124,17 +124,14 @@ else{
                 
             
                 <label ><dt>Importez les photos de l'objet :</dt></label><br>
-                <input type="hidden" style="margin-top: 30px; ;" name="MAX_FILE_SIZE" value="10000000000">
-                Photo 1 : <input type="file" style="margin-top: 30px; ;" name="photo[]"><br>
+                Photo 1 : <input type="file" style="margin-top: 30px; ;" name="photo[]" accept="image/png, image/jpeg, image/jpg"><br>
 
-                <input type="hidden" style="margin-top: 30px; ;" name="MAX_FILE_SIZE" value="100000000000">
-                Photo 2 : <input type="file" style="margin-top: 30px; ;" name="photo[]"><br>
+                Photo 2 : <input type="file" style="margin-top: 30px; ;" name="photo[]" accept="image/png, image/jpeg, image/jpg"><br>
 
-                <input type="hidden" style="margin-top: 30px; ;" name="MAX_FILE_SIZE" value="100000000000">
-                Photo 3 : <input type="file" style="margin-top: 30px; ;" name="photo[]"><br>
+                Photo 3 : <input type="file" style="margin-top: 30px; ;" name="photo[]" accept="image/png, image/jpeg, image/jpg"><br>
 
                 <input type="hidden" style="margin-top: 30px; ;" name="MAX_FILE_SIZE" value="2000000000000">
-                Vidéo (max 2mo) : <input type="file" style="margin-top: 30px; ;" name="photo[]"><br>
+                Vidéo (max 2mo) : <input type="file" style="margin-top: 30px; ;" name="photo[]" accept="video/avi, video/mp4, video/mkv"><br>
 
                 
                 <div id="prix1">
