@@ -29,11 +29,7 @@ if(!isset($_POST['Accepter']) && !isset($_POST['Refuser'])){
 
 
     require('../bases/bdd.php');
-
-    include('../bases/menu.php');
-
     
-
     if($db_found){
 
         // CAS OU L'ACHETEUR FAIT UNE OFFRE
@@ -91,7 +87,6 @@ if(!isset($_POST['Accepter']) && !isset($_POST['Refuser'])){
             }
             elseif(isset($_POST['Accepter'])){
 
-                echo "test 1";
 
 
                 $sqlAccept = "UPDATE meilleuroffre SET accepte ='1' WHERE IDAcheteur = '".$idAcheteur."' AND IDItem = '".$idItem."'";
@@ -111,21 +106,22 @@ if(!isset($_POST['Accepter']) && !isset($_POST['Refuser'])){
                     exit;
                     }
                     else{
-                        $to = $dataVendeur['email'];
+                    $to = $dataVendeur['email'];
                     $subject = "Offre acceptée !";
                     $PrenomVendeur = $dataVendeur['Prenom'];
                     $nomItem = $dataItem['nomitem']; 
                     $loginAcheteur = $dataAcheteur['login'];
                     include('mails/mailacceptevendeur.php');
+                    mail($to, $subject, $msg, $headers);
                     echo '<div class="alert alert-success" role="alert">Vous avez accepté l\'offre ! Merci de procéder au paiement :)</div>';
-                    include('../achat/offre.php?id='.$idItem.'');
+                    include('offre.php');
                     exit;
                     }                    
                 }
                 }
             elseif(isset($_POST['CO'])){
 
-                echo "test3";
+
                 $nbTry2 = $dataOffre['nbtry'];
                 $nbTry = (int)$nbTry2;
                 $nbTry++;
@@ -142,7 +138,7 @@ if(!isset($_POST['Accepter']) && !isset($_POST['Refuser'])){
                     exit;
                 }
                 }
-            elseif(isset($_POST['refuser'])){
+            elseif(isset($_POST['Refuser'])){
                 $nbTry2 = $dataOffre['nbtry'];
                 $nbTry = (int)$nbTry2;
                 $nbTry++;
@@ -226,7 +222,6 @@ if(!isset($_POST['Accepter']) && !isset($_POST['Refuser'])){
             }
             elseif(isset($_POST['CO2'])){
 
-                echo"test6";
                 $nbTry2 = $dataOffre['nbtry'];
                 $nbTry = (int)$nbTry2;
                 $nbTry++;

@@ -120,38 +120,38 @@ include('../bases/menu.php');
               }
               if(!mysqli_num_rows ( $req3 )){
                 echo'</p>
-                    <form method="post" action="traitementoffre.php?id='.$id.'">
-                    <div class="input-group col-md-6" >
-                    <input type="text" class="form-control" name="montant" aria-label="Montant" placeholder="Montant">
-                    <div class="input-group-append">
-                      <span class="input-group-text">€</span>
-                    </div>
-                    <div>
-                    <br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Soumettre votre offre
-                    </button>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                      Selon nos <a href="../bases/CGV">CGV</a>, si le vendeur accepte votre offre vous êtes dans l\'obligation légale de procéder au paiement. Souhaitez-vous continuer ?
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-primary" value="Valider"></input>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                  </div>
-                  </form>';
+                <form method="post" action="traitementoffre.php?id='.$id.'">
+                <div class="input-group col-md-6" >
+                <input type="text" class="form-control" name="montant" aria-label="Montant" placeholder="Montant">
+                <div class="input-group-append">
+                  <span class="input-group-text">€</span>
+                </div>
+                <div>
+                <br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Soumettre votre offre
+                </button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                  Selon nos <a href="../bases/CGV">CGV</a>, si le vendeur accepte votre offre vous êtes dans l\'obligation légale de procéder au paiement. Souhaitez-vous continuer ?
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+              </div>
+              </form>';
 
               }
               else{
@@ -240,10 +240,10 @@ include('../bases/menu.php');
                     <form method="post" action="traitementoffre.php?id='.$id.'">
                     <div class="input-group col-md-12" >
                     <div>
-                    <input type="submit" name="Accepter" class="btn btn-primary test value="Accepter l\'offre"></input>
+                    <input type="submit" name="Accepter" class="btn btn-primary test" value="Accepter l\'offre"></input>
                     </div>
                     <br><br><p>Ou <u>Refuser :</u> Si vous refusez, les négociations s\'arrêtent et vous ne pourrez plus négocier pour cet article.</p><br>
-                    <br><input type="submit" name="refuser" class="btn btn-danger" value="Refuser">
+                    <br><input type="submit" name="Refuser" class="btn btn-danger" value="Refuser">
                     </form>';
                   }
                   elseif ($data3['IDAcheteur'] == $idVisiteur && $data3['accepte'] == "0" && $_SESSION['statut'] == "acheteur" && $data3['nbtry'] == "11"){
