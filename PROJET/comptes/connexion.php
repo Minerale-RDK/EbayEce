@@ -61,7 +61,7 @@ if ($db_found)
         $_SESSION['avatar'] = $data['file_url'];
         $_SESSION['fond'] = $data['cover_url'];
         $_SESSION['id'] = $data['IDVendeur'];
-        echo '<script language="Javascript"> document.location.replace("../comptes/moncompte_acheteur.php"); </script>';
+        echo '<script language="Javascript"> document.location.replace("../comptes/moncompte_vendeur.php"); </script>';
         exit;
     }
 }
