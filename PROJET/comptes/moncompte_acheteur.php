@@ -40,37 +40,45 @@
     $sql = "SELECT * FROM meilleuroffre WHERE IDAcheteur = $id AND accepte = 1";
     $result = mysqli_query($db_handle, $sql);
 
+    $sql2 = "SELECT * FROM encheres WHERE IDAcheteur = $id AND win = 1";
+    $result2 = mysqli_query($db_handle, $sql2);
+
     $titre = "Mes négociations réussies à payer";
 
-    $vendu = 2;
 
-    if(mysqli_num_rows($result) != 0){
+    if(mysqli_num_rows($result) != 0 || mysqli_num_rows($result2) != 0){
 
         $i=4;
         $id_item = array();
 
         while ($data = mysqli_fetch_assoc($result)) {
-            array_push($id_item, $data['IDItem']);
+            array_push($id_item, array($data['IDItem'], 1));
+        }
+        while ($data2 = mysqli_fetch_assoc($result2)) {
+            $sql = "SELECT * FROM items WHERE IDItem = $a AND avendre = 2";
+            $result = mysqli_query($db_handle, $sql);
+            $data = mysqli_fetch_assoc($result);
+            array_push($id_item, array($data['IDItem'], 2));
         }
         $nbr = sizeof($id_item);
         echo '<h1 style="margin-left: 15px;">'.$titre.' ('.sizeof($id_item).')</h1><br>';
-        foreach($id_item as &$a){
-            $sql = "SELECT * FROM items WHERE IDItem = $a AND avendre = 1";
+        foreach($id_item as list($a, $type)){
+ 
+            $sql = "SELECT * FROM items WHERE IDItem = $a AND avendre = $type";
             $result = mysqli_query($db_handle, $sql);
-
             $data = mysqli_fetch_assoc($result);
-
-            $b=3;
+            if($type == 1){$vendu = 2;}
+            if($type == 2){$vendu = 4;}
 
             if ($i%4 == 0){
 
                 echo '<div class="card-deck">';
-                item($data, $vendu, $b);
+                item($data, $vendu, 3);
                         
             }
             else{
                 
-                item($data, $vendu, $b);
+                item($data, $vendu, 3);
 
             }
             $i++;
@@ -85,22 +93,26 @@
 
     $sql = "SELECT * FROM meilleuroffre WHERE IDAcheteur = $id AND accepte = 0 AND nbtry<11";
     $result = mysqli_query($db_handle, $sql);
+    $sql2 = "SELECT * FROM encheres WHERE IDAcheteur = $id ";
+    $result2 = mysqli_query($db_handle, $sql2);
 
     $titre = "Mes négociations en cours";
     $msg_erreurb = "Aucune négotiation en cours";
 
-    $vendu = 2;
 
-    if(mysqli_num_rows($result) == 0){
+    if(mysqli_num_rows($result) == 0 && mysqli_num_rows($result2) == 0){
 
         maboutique($titre, $msg_erreurb, $result);
 
     }else {
         $i=4;
-        $id_item = array();
+        $id_item_ench = array();
 
         while ($data = mysqli_fetch_assoc($result)) {
             array_push($id_item, array($data['IDItem'], $data['tour'], $data['prixprop']));
+        }
+        while ($data = mysqli_fetch_assoc($result2)) {
+            array_push($id_item_ench, array($data['IDItem'], $data['win'], $data['prixench']));
         }
         $id_verif = array();
         foreach($id_item as list($a, $b, $prix)){
@@ -108,7 +120,16 @@
             $result = mysqli_query($db_handle, $sql);
             if(mysqli_num_rows($result) != 0){
 
-                array_push($id_verif, array($a, $b, $prix));
+                array_push($id_verif, array($a, $b, $prix, "offre"));
+        
+            }
+        }
+        foreach($id_item_ench as list($a, $b, $prix)){
+            $sql = "SELECT * FROM items WHERE IDItem = $a AND avendre = 1";
+            $result = mysqli_query($db_handle, $sql);
+            if(mysqli_num_rows($result) != 0){
+
+                array_push($id_verif, array($a, $b, $prix, "ench"));
         
             }
         }
@@ -119,7 +140,17 @@
         }else{
         echo '<h1 style="margin-left: 15px;">'.$titre.' ('.sizeof($id_verif) .')</h1><br>';
         $nbr = sizeof($id_verif);
-        foreach($id_verif as list($a, $b, $prix)){
+        foreach($id_verif as list($a, $b, $prix, $type)){
+            if($type == "offre"){
+
+                $vendu = 2;
+
+            }elseif($type == "ench"){
+
+                $vendu = 4;
+
+            }
+
             $sql = "SELECT * FROM items WHERE IDItem = $a AND avendre = 1";
             $result = mysqli_query($db_handle, $sql);
             $data = mysqli_fetch_assoc($result);

@@ -90,8 +90,50 @@ function item($data, $vendu, $meilleureoffre=0 ,$login="", $id_ach=0 ,$prix=0){
         }
             echo'</small> </div></div>';
 
-    }
+    }elseif($vendu == 4){
+
+        echo '<a href="../achat/enchere.php?id='.$data['IDItem'].'">
+            <img src="'.$extfile.'" style="width:100%;" class="img-thumbnail" >
+            </a>
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">'.$data['nomitem'].'</h5>';
+            if($meilleureoffre == 1){
+                echo '<p class="card-text">Vous avez la meilleure enchère : '.$prix.' €</p>
+                </div>
+                <div class="card-footer">';
                 
+            }elseif($meilleureoffre == 0){
+                echo ' <p class="card-text">Un utilisateur a fait une offre supérieur à : '.$prix.' €</p>
+                <p>Vous n\'avez plus la meilleure enchère. Faites-en une nouvelle !</p>
+                </div>
+                <div class="card-footer">';
+                
+            }elseif($meilleureoffre == 3){
+                echo ' <p class="card-text"> Félicitations ! Vous avez gagné l\'enchère au prix de : '.$prix.' €</p>
+                <p>Vous n\'avez plus qu\'à ajouter le produit dans votre panier !</p>
+                </div>
+                <div class="card-footer">';
+            }
+
+            echo'<small class="text-muted">Enchères</small> </div></div>';
+
+        
+    }elseif($vendu == 4){
+
+        echo '<a href="../achat/enchere.php?id='.$data['IDItem'].'">
+            <img src="'.$extfile.'" style="width:100%;" class="img-thumbnail" >
+            </a>
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">'.$data['nomitem'].'</h5>
+            <p class="card-text"> Félicitations ! Votre produit s\'est vendu au enchères au prix de : '.$prix.' €</p>
+                <p>'.$login.' procède au paiement !</p>
+                </div>
+                <div class="card-footer"><div class="card-footer"><small class="text-muted">Enchères</small> </div></div>';
+
+        
+    }         
 
 }
 
