@@ -119,7 +119,7 @@ function item($data, $vendu, $meilleureoffre=0 ,$login="", $id_ach=0 ,$prix=0){
             echo'<small class="text-muted">Enchères</small> </div></div>';
 
         
-    }elseif($vendu == 4){
+    }elseif($vendu == 5){
 
         echo '<a href="../achat/enchere.php?id='.$data['IDItem'].'">
             <img src="'.$extfile.'" style="width:100%;" class="img-thumbnail" >
@@ -128,12 +128,36 @@ function item($data, $vendu, $meilleureoffre=0 ,$login="", $id_ach=0 ,$prix=0){
             <div class="card-body">
             <h5 class="card-title">'.$data['nomitem'].'</h5>
             <p class="card-text"> Félicitations ! Votre produit s\'est vendu au enchères au prix de : '.$prix.' €</p>
-                <p>'.$login.' procède au paiement !</p>
+                <p class="card-text">'.$login.' procède au paiement !</p>
                 </div>
                 <div class="card-footer"><div class="card-footer"><small class="text-muted">Enchères</small> </div></div>';
 
         
-    }         
+    }elseif($vendu == 6){
+
+        echo '<a href="../achat/compte_vendeur.php?id='.$data['IDVendeur'].'">
+            <img src="'.$data['file_url'].'" style="width:100%;" class="img-thumbnail" >
+            </a>
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">'.$data['login'].'</h5>
+            <p class="card-text"> Ce vendeur a vendu '.$meilleureoffre.' articles</p>
+                </div>
+                <div class="card-footer"><div class="card-footer"><small class="text-muted">Vendeur hors paire</small> </div></div>';
+
+        
+    }elseif($vendu == 7){
+
+        echo '<img src="'.$data['chemindossier'].'" style="width:100%;" class="img-thumbnail" >
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">'.$data['nomitem'].'</h5>
+            <p class="card-text"> Ce produit a été vendu au prix de : '.$data['prix'].' € </p>
+                </div>
+                <div class="card-footer"><div class="card-footer"><small class="text-muted">Vous aussi vendez vos biens !</small> </div></div>';
+
+        
+    }        
 
 }
 
