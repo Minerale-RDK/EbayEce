@@ -126,11 +126,11 @@
                 Achat&ensp;
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="../items/articles?cat=ench">Les Enchères</a>
+                <a class="dropdown-item" href="../items/articles.php?cat=ench">Les Enchères</a>
                     
-                <a class="dropdown-item" href="../items/articles?cat=atim">Achetez-le maintenant</a>
+                <a class="dropdown-item" href="../items/articles.php?cat=atim">Achetez-le maintenant</a>
                     
-                <a class="dropdown-item" href="../items/articles?cat=mof">Meilleures offres</a>
+                <a class="dropdown-item" href="../items/articles.php?cat=mof">Meilleures offres</a>
                 
                     </div>
                 </li>
