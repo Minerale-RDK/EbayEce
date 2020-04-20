@@ -58,6 +58,7 @@ foreach($table_verif as &$bdd){
     
 
 if (sizeof($erreur) == 0) {
+    $pwd = password_hash($pwd, PASSWORD_DEFAULT);
     $sqlInsert = "INSERT INTO acheteurs(login, pwd, Nom, Prenom, email) 
     VALUES ('$login', '$pwd', '$nom', '$prenom', '$email')";
     $result = mysqli_query($db_handle, $sqlInsert);

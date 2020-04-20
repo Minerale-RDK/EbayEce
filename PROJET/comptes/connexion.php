@@ -17,15 +17,15 @@ if ($db_found)
     $req = mysqli_query($db_handle, $sql);
     $data = mysqli_fetch_assoc($req);
 
-    if($data['pwd'] != $pass) {
+    if(!password_verify($pass, $data['pwd'])) {
         $sql = "SELECT pwd FROM acheteurs WHERE login='".$login."'";
         $req = mysqli_query($db_handle, $sql);
         $data = mysqli_fetch_assoc($req);
-        if($data['pwd'] != $pass) {
+        if(!password_verify($pass, $data['pwd'])) {
             $sql = "SELECT pwd FROM admin WHERE login='".$login."'";
             $req = mysqli_query($db_handle, $sql);
             $data = mysqli_fetch_assoc($req);
-            if($data['pwd'] != $pass) {
+            if($pass != $data['pwd']) {
             echo '<script language="Javascript"> document.location.replace("login.php?erreur=1"); </script>';
             exit;
             }else{

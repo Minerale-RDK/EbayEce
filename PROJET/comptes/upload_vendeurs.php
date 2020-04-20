@@ -81,6 +81,7 @@ if (sizeof($erreur) == 0) {
         $new_file_dest ='../files/'.$login.'/'.$file_name;
         rename($file_dest, $new_file_dest);
     }
+    $pwd = password_hash($pwd, PASSWORD_DEFAULT);
     $sqlInsert = "INSERT INTO vendeurs(login, pwd, Nom, Prenom, email, name, file_url, cover_url) 
     VALUES ('$login', '$pwd', '$nom', '$prenom', '$email', '$file_name','$new_file_dest','$ban')";
     $result = mysqli_query($db_handle, $sqlInsert);
