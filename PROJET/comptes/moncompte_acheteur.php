@@ -117,10 +117,10 @@
             maboutique($titre, $msg_erreurb, $result);
     
         }else{
-            $nbr = sizeof($id_verif);
         echo '<h1 style="margin-left: 15px;">'.$titre.' ('.sizeof($id_verif) .')</h1><br>';
         $nbr = sizeof($id_verif);
         foreach($id_verif as list($a, $b, $prix)){
+            $sql = "SELECT * FROM items WHERE IDItem = $a AND avendre = 1";
             $result = mysqli_query($db_handle, $sql);
             $data = mysqli_fetch_assoc($result);
 

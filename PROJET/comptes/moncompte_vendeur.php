@@ -75,7 +75,7 @@
                     $sql2 = "SELECT login FROM acheteurs WHERE IDAcheteur = $c";
                     $result = mysqli_query($db_handle, $sql2);
                     $data = mysqli_fetch_assoc($result);
-                    array_push($id_verif, array($data['login'] ,$b, $c, $prix));
+                    array_push($id_verif, array($a ,$b, $c, $prix, $data['login'] ));
             
                 }
             }
@@ -84,22 +84,22 @@
                 maboutique($titre, $msg_erreurb, $result);
 
             }else{
-            $nbr = sizeof($id_verif);
             echo '<h1 style="margin-left: 15px;">'.$titre.' ('.sizeof($id_verif) .')</h1><br>';
             $nbr = sizeof($id_verif);
-            foreach($id_verif as list($a, $b, $c, $prix)){
+            foreach($id_verif as list($a, $b, $c, $prix, $login)){
+                $sql = "SELECT * FROM items WHERE IDItem = $a AND avendre = 1";
                 $result = mysqli_query($db_handle, $sql);
                 $data = mysqli_fetch_assoc($result);
 
                 if ($i%4 == 0){
 
                     echo '<div class="card-deck">';
-                    item($data, $vendu, $b ,$a ,$c, $prix);
+                    item($data, $vendu, $b ,$login ,$c, $prix);
                             
                 }
                 else{
                     
-                    item($data, $vendu, $b ,$a ,$c ,$prix);
+                    item($data, $vendu, $b ,$login ,$c ,$prix);
 
                 }
                 $i++;
@@ -136,7 +136,6 @@
             $data2 = mysqli_fetch_assoc($result);
             array_push($id_item, array($data['IDItem'], $data2['login']));
         }
-        $nbr = sizeof($id_item);
         echo '<h1 style="margin-left: 15px;">'.$titre.' ('.sizeof($id_item).')</h1><br>';
         $nbr = sizeof($id_item);
         foreach($id_item as list($a, $login)){
