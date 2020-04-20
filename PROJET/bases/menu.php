@@ -89,6 +89,9 @@
             echo '<ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="../comptes/login.php">
                 Se Connecter&ensp; <i class="fa fa-user" aria-hidden="true"></i></a></li>
+                <li class="nav-item"><a class="nav-link">|</a></li>
+            <li class="nav-item"><a class="nav-link" href="../comptes/login_admin.php">
+                Admin&ensp;</a></li>
         </ul> ';
         }
         ?>
