@@ -10,15 +10,7 @@ $db_found = mysqli_select_db($db_handle, $database);
 
 if ($db_found)
 {
-    if ($login == "") { 
-        echo "Identifiant est vide. <br>";
-        include('login.php');
-        exit; }
-
-    if ($pass == "") {
-        echo"Mot de passe est vide. <br>";
-        include('login.php');
-        exit; }
+    
 
     
     $sql = "SELECT pwd FROM vendeurs WHERE login='".$login."'";
@@ -73,10 +65,6 @@ if ($db_found)
         exit;
     }
 }
-else {
-    echo '<p> Vous avez oublié un champ.</p>';
-    include('login.php');
-    exit;
-}
+
 
 ?>
